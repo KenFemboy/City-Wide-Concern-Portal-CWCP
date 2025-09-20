@@ -9,12 +9,12 @@ import Searchbar from './SEARCHBAR/searchbar.jsx'
 
 
 import Mod from './MODERATOR/login.jsx'
-
+import Dashboard from './MODERATOR/dahsboard.jsx'
 
 
 createRoot(document.getElementById('root')).render(
     <>
-        <div id='body'>
+        {/* <div id='body'>
             <SidebarLeft />
 
             <div id='main'>
@@ -22,12 +22,14 @@ createRoot(document.getElementById('root')).render(
                 <Main />
             </div>
             
-        </div>
+        </div> */}
 
 
 
 
         {/* <Mod/> */}
+
+        <Dashboard/>
     </>
 
 
