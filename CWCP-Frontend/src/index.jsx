@@ -19,8 +19,10 @@ createRoot(document.getElementById('root')).render(
                 <Searchbar/>
                 <Main />
             </div>
+            
+
         </div>
-        <footer>test</footer>
+        
     </>
 
 

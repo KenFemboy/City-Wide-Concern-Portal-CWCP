@@ -3,13 +3,10 @@ import './searchbar.css'
 const searchbar = () => {
     return (
 
-        <div class="header">
-            <h1>City Wide Concern Portal</h1>
-            <br/>
-            <div class="search-bar">
-                <input type="text" placeholder="Search by area, issue, or status..." />
-                🔔
-            </div>
+        <div className="header">
+            <h1>See something? Do Something!</h1>
+            <input type="text" placeholder="Search by area, issue, or status..." />
+
         </div>
 
     )
