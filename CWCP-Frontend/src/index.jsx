@@ -8,6 +8,8 @@ import SidebarLeft from './SIDEBAR-LEFT/sidebar_left.jsx'
 import Searchbar from './SEARCHBAR/searchbar.jsx'
 
 
+import Mod from './MODERATOR/login.jsx'
+
 
 
 createRoot(document.getElementById('root')).render(
@@ -20,9 +22,12 @@ createRoot(document.getElementById('root')).render(
                 <Main />
             </div>
             
-
         </div>
-        
+
+
+
+
+        {/* <Mod/> */}
     </>
 
 
