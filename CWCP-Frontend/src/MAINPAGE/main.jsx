@@ -4,15 +4,16 @@ import Cards from "../CARDS/cards.jsx"
 const main = () => {
   return (
     <div className='main'>
-      {/* <button className="report-btn">
+      <button className="report-btn">
         Report Concern
-      </button> */}
+      </button>
 
       {/* cards */}
       <div className='cards'>
-        <Cards/>
-        <Cards/>
-        <Cards/>
+        <Cards title="Palm Accident" area="San Miguel" comment="asjdaslkdlkasjdkasjdlkadj" status="pending"/>
+        
+        
+        
         
 
    
