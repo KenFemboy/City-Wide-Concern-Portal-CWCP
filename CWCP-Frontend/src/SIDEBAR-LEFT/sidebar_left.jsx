@@ -1,9 +1,10 @@
 import React from "react";
 import './sidebar_left.css'
 import Credits from '../Credits/credits.jsx'
+import Testlinks from '../Credits/testlinks.jsx'
 const sidebar_left = () => {
   return (
-    <div>
+    <div className="sidebar_left">
       <div className="sidebar">
         <div className="cwcp-logo">
           <img src="CWCP-LOGO.svg" />
@@ -39,6 +40,7 @@ const sidebar_left = () => {
 
         <br />
         <Credits/>
+        <Testlinks/>
       </div>
       
     </div>

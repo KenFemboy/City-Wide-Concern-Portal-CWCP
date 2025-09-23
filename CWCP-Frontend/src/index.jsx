@@ -1,36 +1,10 @@
-import { StrictMode } from 'react'
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { createRoot } from 'react-dom/client'
+import App from "./app.jsx"
 import './index.css'
-
-// Elements
-import Main from './MAINPAGE/main.jsx'
-import SidebarLeft from './SIDEBAR-LEFT/sidebar_left.jsx'
-import Searchbar from './SEARCHBAR/searchbar.jsx'
-
-
-import Mod from './MODERATOR/login.jsx'
-import Dashboard from './MODERATOR/dahsboard.jsx'
 
 
 createRoot(document.getElementById('root')).render(
-    <>
-        {/* <div id='body'>
-            <SidebarLeft />
-
-            <div id='main'>
-                <Searchbar/>
-                <Main />
-            </div>
-            
-        </div> */}
-
-
-
-
-        {/* <Mod/> */}
-
-        <Dashboard/>
-    </>
-
+    <App/>
 
 )
