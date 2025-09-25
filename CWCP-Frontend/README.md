@@ -1,12 +1,9 @@
-# React + Vite
+how to run on local device
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+1. Install node.js latest version!
+2. navigate to ../CWCP-Frontend using "cd cwcp-frontend" in the terminal
+3. run "npm install" in the terminal
+4. run "npm run dev" in the terminal
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+5. navigate to ../CWCP-Backend using "cd cwcp-backend" in the terminal
+6. run "npm install" in the terminal to start the server

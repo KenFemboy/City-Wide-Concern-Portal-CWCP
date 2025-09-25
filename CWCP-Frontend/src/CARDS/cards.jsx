@@ -2,6 +2,8 @@ import React from "react";
 import "./cards.css";
 import { useLocation } from "react-router-dom";
 const cards = ({ title, area, comment, status }) => {
+    
+    
     const renderButtons = () => {
         const location = useLocation();
 
