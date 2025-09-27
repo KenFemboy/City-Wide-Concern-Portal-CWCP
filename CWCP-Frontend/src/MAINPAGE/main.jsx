@@ -31,7 +31,7 @@ const main = () => {
           timestamp="2025-09-27 14:32"
         />
 
-        
+
         <Cards
           title="Palm Accident"
           area="San Miguel"
@@ -41,6 +41,14 @@ const main = () => {
           timestamp="2025-09-27 14:32"
         />
 
+        <Cards
+          title="Power Outage"
+          area="San Juan"
+          comment="No electricity since last night.asdsadasdasdsaddddddddddddd"
+          status="pending"
+          severity="Critical"
+          timestamp="2025-09-27 06:45"
+        />
       </div>
 
     </div>

@@ -1,72 +1,102 @@
 .card {
   background: #fffefb;
-  border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: flex-start;
-  padding: 28px 32px;
+  padding: 32px 36px;
   margin: 40px auto;
-  gap: 24px;
-  border: 1px solid #f6f1e8;
-  max-width: 600px;
+  margin-left: 10px;
+  gap: 28px;
+  border: 1.5px solid #f6f1e8;
+  max-width: 650px;
   transition: box-shadow 0.2s, transform 0.2s;
-  margin-left: 20px;
+  position: relative;
 }
 
 .card:hover {
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.13);
-  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16);
+  transform: translateY(-6px) scale(1.015);
 }
 
 .card img {
-  width: 180px;
-  height: 180px;
+  width: 360px;
+  height: 360px;
   object-fit: cover;
-  border-radius: 12px;
-  border: 2px solid #f6f1e8;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  border-radius: 14px;
+  border: 2px solid #eae6da;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  background: #f6f1e8;
 }
 
 .card-content {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
 }
 
 .card-content h3 {
-  margin: 0 0 4px 0;
-  font-size: 22px;
+  margin: 0;
+  font-size: 24px;
   color: #1f3d1f;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.5px;
 }
 
 .card-content h5 {
   margin: 0 0 8px 0;
-  font-size: 15px;
+  font-size: 16px;
   color: #7db343;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .card-content p {
   margin: 2px 0 8px 0;
   color: #444;
   font-size: 15px;
-  line-height: 1.5;
+  line-height: 1.6;
+  word-break: break-word;
+  /* Prevents long words from overflowing */
+  overflow-wrap: anywhere;
+  /* Allows breaking at any point if needed */
+  max-width: 100%;
+  /* Ensures it stays within the card */
 }
 
 .card-content .status {
   display: inline-block;
-  padding: 4px 14px;
-  border-radius: 12px;
-  background: #a0fc6b;
+  padding: 5px 18px;
+  border-radius: 14px;
+  background: linear-gradient(90deg, #a0fc6b 60%, #fce96b 100%);
   color: #1f3d1f;
-  font-size: 13px;
-  font-weight: 600;
-  margin-top: 6px;
-  margin-bottom: 8px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  font-size: 14px;
+  font-weight: 700;
+  margin-left: 12px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.07);
+  border: 1px solid #eae6da;
+}
+
+.card-content .meta {
+  display: flex;
+  gap: 18px;
+  font-size: 14px;
+  color: #7db343;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.card-content .meta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .card-content .modbuttons {
@@ -80,10 +110,9 @@
   border: none;
   border-radius: 8px;
   font-size: 15px;
-  margin-right: 0;
   cursor: pointer;
   font-weight: 600;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
   transition: background 0.2s, transform 0.2s;
 }
 
@@ -105,4 +134,63 @@
 .modbuttons button:hover {
   transform: translateY(-2px) scale(1.04);
   opacity: 0.92;
+}
+
+.expand-btn {
+  background: none;
+  border: none;
+  color: #7db343;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 8px 0;
+  padding: 0;
+  transition: color 0.2s;
+  align-self: flex-start;
+}
+
+.expand-btn:hover {
+  color: #1f3d1f;
+  text-decoration: underline;
+}
+
+.details {
+  margin-top: 10px;
+  padding: 12px 0 0 0;
+  border-top: 1px solid #f6f1e8;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #fdf8f0;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.details p {
+  width: 100%;
+  min-height: 60px;
+  height: 120px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 8px;
+  font-size: 15px;
+  color: #444;
+  word-break: break-word;
+  transition: box-shadow 0.2s;
+}
+
+.card-red {
+  background: #ffeaea;
+  border: 2px solid #ff4d4f;
+}
+
+.card-yellow {
+  background: #fffbe6;
+  border: 2px solid #ffd666;
+}
+
+.card-grey {
+  background: #f5f5f5;
+  border: 2px solid #bfbfbf;
 }
