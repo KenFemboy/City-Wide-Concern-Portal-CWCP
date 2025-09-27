@@ -1,17 +1,23 @@
-import React from 'react'
+import React ,{useState} from 'react'
 import "./main.css"
 import Cards from "../CARDS/cards.jsx"
+import Form from '../FORM/form.jsx'
 import { useLocation } from 'react-router-dom'
 const main = () => {
+  const [modal, setModal] = useState(false);
+
+ 
 
   const renderButtons = () => {
     const location = useLocation();
 
     if (location.pathname === "/") {
       return (
-        <button className="report-btn">
-          Report Concern
-        </button>
+        <>
+        
+        <Form/>
+       
+        </>
       );
     }
 
