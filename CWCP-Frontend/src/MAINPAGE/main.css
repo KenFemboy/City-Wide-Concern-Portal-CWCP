@@ -6,9 +6,10 @@
     height: 100%;
     padding: 20px;
     box-sizing: border-box;
+    padding-left: 30px;
 }
 .report-btn {
-  margin: 10px 30px;
+  margin: 10px 10px;
   padding: 12px 20px;
   background: #7db343;
   border: none;

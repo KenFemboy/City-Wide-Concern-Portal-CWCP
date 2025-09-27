@@ -1,56 +1,108 @@
 .card {
   background: #fffefb;
-  border-radius: 10px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
   display: flex;
-  align-items: center;
-  padding: 20px;
-  margin: 50px;
-  gap: 10px;
+  align-items: flex-start;
+  padding: 28px 32px;
+  margin: 40px auto;
+  gap: 24px;
+  border: 1px solid #f6f1e8;
+  max-width: 600px;
+  transition: box-shadow 0.2s, transform 0.2s;
+  margin-left: 20px;
+}
+
+.card:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.13);
+  transform: translateY(-4px) scale(1.01);
 }
 
 .card img {
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 12px;
+  border: 2px solid #f6f1e8;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
 }
 
 .card-content {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .card-content h3 {
-  margin: 0;
-  font-size: 18px;
+  margin: 0 0 4px 0;
+  font-size: 22px;
   color: #1f3d1f;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.card-content h5 {
+  margin: 0 0 8px 0;
+  font-size: 15px;
+  color: #7db343;
+  font-weight: 500;
 }
 
 .card-content p {
-  margin: 5px 0 10px;
+  margin: 2px 0 8px 0;
   color: #444;
-  font-size: 14px;
+  font-size: 15px;
+  line-height: 1.5;
 }
+
+.card-content .status {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 12px;
+  background: #a0fc6b;
+  color: #1f3d1f;
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 6px;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
 .card-content .modbuttons {
-  margin-top: 20px;
+  margin-top: 18px;
+  display: flex;
+  gap: 10px;
 }
+
 .modbuttons button {
-  padding: 8px 12px;
+  padding: 8px 18px;
   border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  margin-right: 8px;
+  border-radius: 8px;
+  font-size: 15px;
+  margin-right: 0;
   cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  transition: background 0.2s, transform 0.2s;
 }
+
 #approve {
   background: #a5d46a;
   color: #1f3d1f;
 }
+
 #deny {
   background: #fce96b;
   color: #1f3d1f;
 }
+
 #delete {
   background: #f28b82;
   color: #fff;
+}
+
+.modbuttons button:hover {
+  transform: translateY(-2px) scale(1.04);
+  opacity: 0.92;
 }

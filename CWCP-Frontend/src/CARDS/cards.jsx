@@ -1,12 +1,11 @@
 import React from "react";
 import "./cards.css";
 import { useLocation } from "react-router-dom";
-const cards = ({ title, area, comment, status }) => {
-    
-    
-    const renderButtons = () => {
-        const location = useLocation();
 
+const Cards = ({ title, area, comment, status, severity, timestamp }) => {
+    const location = useLocation();
+
+    const renderButtons = () => {
         if (location.pathname === "/dashboard") {
             return (
                 <div className="modbuttons">
@@ -17,12 +16,11 @@ const cards = ({ title, area, comment, status }) => {
                         Delete
                     </button>
                 </div>
-
             );
         }
-
         return null;
     };
+
     return (
         <div>
             <div className="card">
@@ -31,13 +29,14 @@ const cards = ({ title, area, comment, status }) => {
                     <h3>{title}</h3>
                     <h5>{area}</h5>
                     <p>{comment}</p>
+                    <p><strong>Severity:</strong> {severity}</p>
+                    <p><strong>Timestamp:</strong> {timestamp}</p>
                     <span className="status">{status}</span>
                     {renderButtons()}
                 </div>
-                
             </div>
         </div>
     );
 };
 
-export default cards;
+export default Cards;
