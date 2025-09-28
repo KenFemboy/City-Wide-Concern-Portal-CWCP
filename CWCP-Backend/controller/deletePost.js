@@ -1,6 +1,6 @@
-import userSchema from "../model/userModel.js"
+import userSchema from "../model/postModel.js"
 
-export const createPost = async (req, res) => {
+export const deletePost = async (req, res) => {
   try {
     const userPost = new userSchema(req.body);
 

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema({
+const postSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true
@@ -27,4 +27,4 @@ const userSchema = new mongoose.Schema({
   }
 });
 
-export default mongoose.model("UserConcern", userSchema);
+export default mongoose.model("userconcern", postSchema);

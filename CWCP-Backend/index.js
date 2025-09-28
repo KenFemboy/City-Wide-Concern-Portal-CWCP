@@ -10,7 +10,7 @@ import cors from "cors";
 const app = express();
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "*",
     credentials: true,
   })
 );
@@ -24,9 +24,9 @@ mongoose
   .connect(MONGOURL)
   .then(() => {
     console.log("DB connected successfully.");
+    app.use("/api", route);
     app.listen(PORT, () => {
       console.log(`SERVER RUNNING : ${PORT}`);
     });
   })
   .catch((error) => console.log(error));
-app.use("/api", route);
