@@ -1,11 +1,29 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
+import axios from "axios"
+
 import "./main.css"
+
 import Cards from "../CARDS/cards.jsx"
 import Form from '../FORM/form.jsx'
-import { useLocation } from 'react-router-dom'
-const main = () => {
-  const [modal, setModal] = useState(false);
 
+
+const main = () => {
+  // const [modal, setModal] = useState(false);
+
+  const [post, setPosts] = useState([])
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/fetch`)
+        setPosts(response.data)
+      }
+      catch (error) {
+        console.log("Unable to retrieve data", error)
+      }
+    };
+    fetchData();
+  }, []);
 
 
   const renderButtons = () => {
@@ -25,51 +43,26 @@ const main = () => {
     <div className='main'>
       {renderButtons()}
       {/* cards */}
-      <div className='cards'>
+
+
+
+      {post.map((concern, idx) => (
         <Cards
-          title="Palm Accident"
-          area="San Miguel"
-          comment="asjdaslkdlkasjdkasjdlkadj"
-          status="pending"
-          severity="High"
-          timestamp="2025-09-27 14:32"
+          key={idx}
+          title={concern.title}
+          area={concern.area}
+          comment={concern.description}
+          status={concern.status || "pending"}
+          severity={concern.severity}
+          timestamp={concern.timestamp}
+          photo={concern.photo}
         />
+      ))}
 
-
-        <Cards
-          title="Palm Accident"
-          area="San Miguel"
-          comment="asjdaslkdlkasjdkasjdlkadj"
-          status="pending"
-          severity="High"
-          timestamp="2025-09-27 14:32"
-        />
-
-        <Cards
-          title="Power Outage"
-          area="San Juan"
-          comment="No electricity since last night.asdsadasdasdsaddddddddddddd"
-          status="pending"
-          severity="Critical"
-          timestamp="2025-09-27 06:45"
-        />
-
-
-        {/* {concerns.map((concern, idx) => (
-          <Cards
-            key={idx}
-            title={concern.title}
-            area={concern.area}
-            comment={concern.description}
-            status={concern.status || "pending"}
-            severity={concern.severity}
-            timestamp={concern.timestamp}
-            photo={concern.photo}
-          />
-        ))} */}
-      </div>
 
     </div>
+
+
   )
 }
 
