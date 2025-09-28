@@ -1,14 +1,30 @@
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-    comment:{
-        type:String,
-        required:true
-    },
-    location:{
-        type:String,
-        required:true
-    }
-})
+  title: {
+    type: String,
+    required: true
+  },
+  timestamp: {
+    type: Date,
+    required: true
+  },
+  photo: {
+    type: String // Store image URL or file path
+  },
+  area: {
+    type: String,
+    required: true
+  },
+  severity: {
+    type: String,
+    enum: ["inconvenient", "hazard", "life-threatening"],
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  }
+});
 
-export default mongoose.model("post", userSchema)
+export default mongoose.model("UserConcern", userSchema);

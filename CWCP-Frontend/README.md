@@ -7,3 +7,4 @@ how to run on local device
 
 5. navigate to ../CWCP-Backend using "cd cwcp-backend" in the terminal
 6. run "npm install" in the terminal to start the server
+7. run "node index.js"

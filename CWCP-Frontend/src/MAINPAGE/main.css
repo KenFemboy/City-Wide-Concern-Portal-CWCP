@@ -8,22 +8,7 @@
     box-sizing: border-box;
     padding-left: 30px;
 }
-.report-btn {
-  margin: 10px 10px;
-  padding: 12px 20px;
-  background: #7db343;
-  border: none;
-  border-radius: 8px;
-  color: #fff;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  text-decoration: none;
-}
 
-.report-btn:hover {
-  background: #6aa03a;
-}
 
 .cards{
   width: 100%;

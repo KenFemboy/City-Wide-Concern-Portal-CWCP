@@ -90,7 +90,7 @@ const FormModal = () => {
               {/* Submit */}
               <div className="form-actions">
                 <button type="submit" className="submit-btn">
-                  🚀 Submit Concern
+                   Submit Concern
                 </button>
               </div>
             </form>
