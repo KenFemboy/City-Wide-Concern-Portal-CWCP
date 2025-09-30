@@ -45,19 +45,23 @@ const main = () => {
       {/* cards */}
 
 
+      <div className="cards">
 
-      {post.map((concern, idx) => (
-        <Cards
-          key={idx}
-          title={concern.title}
-          area={concern.area}
-          comment={concern.description}
-          status={concern.status || "pending"}
-          severity={concern.severity}
-          timestamp={concern.timestamp}
-          photo={concern.photo}
-        />
-      ))}
+        {post.map((concern, idx) => (
+          <Cards
+            key={idx}
+            title={concern.title}
+            area={concern.area}
+            comment={concern.description}
+            status={concern.status || "pending"}
+            severity={concern.severity}
+            timestamp={concern.timestamp}
+            photo={concern.photo}
+          />
+        ))}
+
+      </div>
+
 
 
     </div>

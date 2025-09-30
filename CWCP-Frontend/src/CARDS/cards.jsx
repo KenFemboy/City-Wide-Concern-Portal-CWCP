@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 
 const getSeverityColor = (severity) => {
   switch (severity.toLowerCase()) {
-    case "life threatening":
+    case "life-threatening":
     case "critical":
       return "card-red";
     case "hazard":
@@ -34,9 +34,10 @@ const Cards = ({ title, area, comment, status, severity, timestamp, photo }) => 
     }
     return null;
   };
+  const API_URL_UPLOAD = import.meta.env.VITE_API_URL_UPLOAD;
 
   const imageSrc = photo
-    ? `http://localhost:8000/uploads/${photo}`
+    ? `${API_URL_UPLOAD}/${photo}`
     : "https://placehold.co/300x200"; // fallback
 
   return (
