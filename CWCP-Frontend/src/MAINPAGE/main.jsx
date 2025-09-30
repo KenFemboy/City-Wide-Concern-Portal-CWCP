@@ -1,73 +1,67 @@
-import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
-import axios from "axios"
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
 
-import "./main.css"
+import "./main.css";
+import Cards from "../CARDS/cards.jsx";
+import Form from "../FORM/form.jsx";
 
-import Cards from "../CARDS/cards.jsx"
-import Form from '../FORM/form.jsx'
+const Main = () => {
+  const [post, setPosts] = useState([]);
+  const location = useLocation();
 
-
-const main = () => {
-  // const [modal, setModal] = useState(false);
-
-  const [post, setPosts] = useState([])
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/fetch`)
-        setPosts(response.data)
-      }
-      catch (error) {
-        console.log("Unable to retrieve data", error)
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/fetch`
+        );
+        setPosts(response.data);
+      } catch (error) {
+        console.log("Unable to retrieve data", error);
       }
     };
     fetchData();
   }, []);
 
-
   const renderButtons = () => {
-    const location = useLocation();
-
     if (location.pathname === "/") {
-      return (
-        <>
-          <Form />
-        </>
-      );
+      return <Form />;
     }
-
     return null;
   };
-  return (
-    <div className='main'>
-      {renderButtons()}
-      {/* cards */}
 
+  // 👇 logic for which posts to show
+  const visiblePosts =
+    location.pathname === "/dashboard"
+      ? post
+      : post.filter((concern) => concern.approved === true); // only approved
+
+  return (
+    <div className="main">
+      {renderButtons()}
 
       <div className="cards">
-
-        {post.map((concern, idx) => (
-          <Cards
-            key={idx}
-            title={concern.title}
-            area={concern.area}
-            comment={concern.description}
-            status={concern.status || "pending"}
-            severity={concern.severity}
-            timestamp={concern.timestamp}
-            photo={concern.photo}
-          />
-        ))}
-
+        {visiblePosts.length === 0 ? (
+          <h1 id="noposts">No concerns found.</h1>
+        ) : (
+          visiblePosts.map((concern, idx) => (
+            <Cards
+              key={idx}
+              title={concern.title}
+              area={concern.area}
+              comment={concern.description}
+              status={concern.status || "pending"}
+              severity={concern.severity}
+              timestamp={concern.timestamp}
+              photo={concern.photo}
+              approved={concern.approved}
+            />
+          ))
+        )}
       </div>
-
-
-
     </div>
+  );
+};
 
-
-  )
-}
-
-export default main
+export default Main;

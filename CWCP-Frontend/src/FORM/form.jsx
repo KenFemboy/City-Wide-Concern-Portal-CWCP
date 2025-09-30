@@ -11,6 +11,7 @@ const FormModal = () => {
     area: "",
     severity: "",
     description: "",
+    approved:false,
   });
 
   const toggleModal = () => setIsOpen(!isOpen);
@@ -90,7 +91,7 @@ const FormModal = () => {
               <div className="form-group">
                 <label htmlFor="timestamp">Timestamp</label>
                 <input
-                  type="datetime-local"
+                  type="date"
                   id="timestamp"
                   name="timestamp"
                   value={formData.timestamp}

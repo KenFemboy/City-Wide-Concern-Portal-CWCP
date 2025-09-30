@@ -1,7 +1,7 @@
 import React from "react";
 import "./cards.css";
 import { useLocation } from "react-router-dom";
-
+import Modbuttons from "../MODERATOR/modbuttons";
 const getSeverityColor = (severity) => {
   switch (severity.toLowerCase()) {
     case "life-threatening":
@@ -19,21 +19,21 @@ const getSeverityColor = (severity) => {
   }
 };
 
-const Cards = ({ title, area, comment, status, severity, timestamp, photo }) => {
+const Cards = ({ title, area, comment, status, severity, timestamp, photo,approved }) => {
   const location = useLocation();
   const severityClass = getSeverityColor(severity);
 
   const renderButtons = () => {
     if (location.pathname === "/dashboard") {
       return (
-        <div className="modbuttons">
-          <button id="approve">Approve</button>
-          <button id="delete">Delete</button>
-        </div>
+        <Modbuttons/>
       );
     }
     return null;
   };
+
+
+
   const API_URL_UPLOAD = import.meta.env.VITE_API_URL_UPLOAD;
 
   const imageSrc = photo
@@ -58,6 +58,7 @@ const Cards = ({ title, area, comment, status, severity, timestamp, photo }) => 
             <p>
               <strong>Comment:</strong> {comment}
             </p>
+            
             {renderButtons()}
           </div>
         </div>
