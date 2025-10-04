@@ -50,6 +50,7 @@ const visiblePosts = post;
           visiblePosts.map((concern, idx) => (
             <Cards
               key={idx}
+              _id={concern._id}
               title={concern.title}
               area={concern.area}
               comment={concern.description}
