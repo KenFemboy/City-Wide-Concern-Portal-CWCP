@@ -13,3 +13,12 @@ export const fetchPosts = async (req, res) => {
     res.status(500).json({ errorMessage: error.message });
   }
 };
+
+export const getApprovedPosts = async (req, res) => {
+  try {
+    const posts = await userconcern.find({ approved: true });
+    res.status(200).json(posts);
+  } catch (error) {
+    res.status(500).json({ errorMessage: error.message });
+  }
+}

@@ -10,19 +10,25 @@ const Main = () => {
   const [post, setPosts] = useState([]);
   const location = useLocation();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/fetch`
-        );
-        setPosts(response.data);
-      } catch (error) {
-        console.log("Unable to retrieve data", error);
-      }
-    };
-    fetchData();
-  }, []);
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      // 🔹 Decide which API route to call based on current path
+      const endpoint =
+        location.pathname === "/"
+          ? `${import.meta.env.VITE_API_URL}/getApproved` // only approved
+          : `${import.meta.env.VITE_API_URL}/fetch`;   // all posts
+
+      const response = await axios.get(endpoint);
+      setPosts(response.data);
+    } catch (error) {
+      console.log("Unable to retrieve data", error);
+    }
+  };
+
+  fetchData();
+}, [location.pathname]); // re-fetch if route changes
+
 
   const renderButtons = () => {
     if (location.pathname === "/") {
@@ -31,12 +37,8 @@ const Main = () => {
     return null;
   };
 
-  // 👇 logic for which posts to show
-  const visiblePosts =
-    location.pathname === "/dashboard"
-      ? post
-      : post.filter((concern) => concern.approved === true); // only approved
 
+const visiblePosts = post;
   return (
     <div className="main">
       {renderButtons()}
