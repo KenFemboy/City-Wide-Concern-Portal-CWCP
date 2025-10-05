@@ -13,12 +13,9 @@ function App() {
             path: "/",
             element: (
                 <>
-                    <div id="body">
-                        <SidebarLeft />
-                        <div id="main">
-                            <Searchbar />
-                            <Main />
-                        </div>
+                    <div id="main">
+
+                        <Main />
                     </div>
                 </>
             ),
@@ -31,13 +28,13 @@ function App() {
             path: "/dashboard",
             element:
                 <>
-                    <div id="body">
-                        <SidebarLeft />
-                        <div id="main">
-                            <Searchbar />
-                            <Main />
-                        </div>
+
+
+                    <div id="main">
+                        <Searchbar />
+                        <Main />
                     </div>
+
                 </>
             ,
         },

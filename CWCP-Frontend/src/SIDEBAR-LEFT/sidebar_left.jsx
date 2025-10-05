@@ -1,50 +1,64 @@
 import React from "react";
-import './sidebar_left.css'
-import Credits from '../Credits/credits.jsx'
-import Testlinks from '../Credits/testlinks.jsx'
-const sidebar_left = () => {
+import "./sidebar_left.css";
+
+const Sidebar_Left = ({ filters, setFilters }) => {
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilters((prev) => ({ ...prev, [name]: value }));
+  };
+
   return (
-    <div className="sidebar_left">
-      <div className="sidebar">
-        <div className="cwcp-logo">
-          <img src="CWCP-LOGO.svg" />
-          <h2>City Wide Concern Portal</h2>
-        </div>
+    <aside className="sidebar-left">
+      <h2>Filters</h2>
 
-        {/* filters */}
+      {/* 🔹 Area Filter */}
+      <label>Area:</label>
+      <select name="area" value={filters?.area || ""} onChange={handleFilterChange}>
+        <option value="">All Areas</option>
+        <option value="apokon">Apokon</option>
+        <option value="bincungan">Bincungan</option>
+        <option value="busaon">Busaon</option>
+        <option value="canocotan">Canocotan</option>
+        <option value="cuambogan">Cuambogan</option>
+        <option value="la-filipina">La Filipina</option>
+        <option value="liboganon">Liboganon</option>
+        <option value="madaum">Madaum</option>
+        <option value="magdum">Magdum</option>
+        <option value="mankilam">Mankilam</option>
+        <option value="new-balamban">New Balamban</option>
+        <option value="nueva-fuerza">Nueva Fuerza</option>
+        <option value="pagsabangan">Pagsabangan</option>
+        <option value="pandapan">Pandapan</option>
+        <option value="magugpo-poblacion">Magugpo Poblacion</option>
+        <option value="san-agustin">San Agustin</option>
+        <option value="san-isidro">San Isidro</option>
+        <option value="san-miguel-camp-4">San Miguel (Camp 4)</option>
+        <option value="visayan-village">Visayan Village</option>
+        <option value="magugpo-east">Magugpo East</option>
+        <option value="magugpo-north">Magugpo North</option>
+        <option value="magugpo-south">Magugpo South</option>
+        <option value="magugpo-west">Magugpo West</option>
+      </select>
 
-        <h3>Severity</h3>
-        <label><input type="radio" name="severity" /> Inconvenient</label>
-        <label><input type="radio" name="severity" /> Hazard</label>
-        <label><input type="radio" name="severity" /> Life-Threatening</label>
+      {/* 🔹 Severity Filter */}
+      <label>Severity:</label>
+      <select name="severity" value={filters?.severity || ""} onChange={handleFilterChange}>
+        <option value="">All Severity</option>
+        <option value="inconvenient">Inconvenient</option>
+        <option value="hazard">Hazard</option>
+        <option value="life-threatening">Life-Threatening</option>
+      </select>
 
-        {/* status sa concern  */}
-        <h3>Status</h3>
-        <label><input type="radio" name="status" /> Pending</label>
-        <label><input type="radio" name="status" /> In Progress</label>
-        <label><input type="radio" name="status" /> Resolved</label>
-
-
-        {/* area o lugar */}
-        <h3>Area</h3>
-        <select>
-          <option value="">San Miguel</option>
-          <option value="">Mankilam</option>
-          <option value="">La Filipina</option>
-          <option value="">Suaybaguio</option>
-          <option value="">Canocotan</option>
-          
-
-        </select>
-
-
-        <br />
-        <Credits/>
-        <Testlinks/>
-      </div>
-      
-    </div>
+      {/* 🔹 Status Filter */}
+      <label>Status:</label>
+      <select name="status" value={filters?.status || ""} onChange={handleFilterChange}>
+        <option value="">All Status</option>
+        <option value="pending">Pending</option>
+        <option value="in-progress">In Progress</option>
+        <option value="resolved">Resolved</option>
+      </select>
+    </aside>
   );
 };
 
-export default sidebar_left;
+export default Sidebar_Left;

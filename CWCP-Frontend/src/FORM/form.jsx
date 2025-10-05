@@ -11,7 +11,7 @@ const FormModal = () => {
     area: "",
     severity: "",
     description: "",
-    approved:false,
+    approved: false,
   });
 
   const toggleModal = () => setIsOpen(!isOpen);
@@ -46,14 +46,14 @@ const FormModal = () => {
       alert("Concern submitted successfully!");
       setIsOpen(false);
     } catch (error) {
-    if (error.response) {
-      console.error("Error submitting concern:", error.response.data);
-    } else if (error.request) {
-      console.error("No response received:", error.request);
-    } else {
-      console.error("Error:", error.message);
+      if (error.response) {
+        console.error("Error submitting concern:", error.response.data);
+      } else if (error.request) {
+        console.error("No response received:", error.request);
+      } else {
+        console.error("Error:", error.message);
+      }
     }
-  }
   };
 
   return (
@@ -121,9 +121,30 @@ const FormModal = () => {
                   onChange={handleChange}
                 >
                   <option value="">-- Choose an Area --</option>
-                  <option value="mankilam">Mankilam</option>
+                  <option value="">All Areas</option>
+                  <option value="apokon">Apokon</option>
+                  <option value="bincungan">Bincungan</option>
+                  <option value="busaon">Busaon</option>
+                  <option value="canocotan">Canocotan</option>
+                  <option value="cuambogan">Cuambogan</option>
+                  <option value="la-filipina">La Filipina</option>
                   <option value="liboganon">Liboganon</option>
                   <option value="madaum">Madaum</option>
+                  <option value="magdum">Magdum</option>
+                  <option value="mankilam">Mankilam</option>
+                  <option value="new-balamban">New Balamban</option>
+                  <option value="nueva-fuerza">Nueva Fuerza</option>
+                  <option value="pagsabangan">Pagsabangan</option>
+                  <option value="pandapan">Pandapan</option>
+                  <option value="magugpo-poblacion">Magugpo Poblacion</option>
+                  <option value="san-agustin">San Agustin</option>
+                  <option value="san-isidro">San Isidro</option>
+                  <option value="san-miguel-camp-4">San Miguel (Camp 4)</option>
+                  <option value="visayan-village">Visayan Village</option>
+                  <option value="magugpo-east">Magugpo East</option>
+                  <option value="magugpo-north">Magugpo North</option>
+                  <option value="magugpo-south">Magugpo South</option>
+                  <option value="magugpo-west">Magugpo West</option>
                 </select>
               </div>
 
