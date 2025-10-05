@@ -27,7 +27,12 @@ const postSchema = new mongoose.Schema({
   },
   approved: {
     type: Boolean,
-    default: false   // ensure every doc has this
+    default: false // ensure every doc has this
+  },
+  status: {
+    type: String,
+    default: "pending", // default status
+    enum: ["pending", "ongoing", "resolved"] 
   }
 });
 

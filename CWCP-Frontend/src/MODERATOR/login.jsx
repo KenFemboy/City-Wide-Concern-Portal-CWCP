@@ -16,13 +16,10 @@ const login = () => {
             <div className="right">
                 <div className="login-box">
                     <h2>Moderator Log In</h2>
-
                     <label>USERNAME/EMAIL</label>
                     <input type="text" id="username" name="username" />
-
                     <label >PASSWORD</label>
                     <input type="password" id="password" name="password" />
-
                     <button >Login</button>
 
 
