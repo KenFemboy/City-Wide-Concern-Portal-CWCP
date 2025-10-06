@@ -41,7 +41,7 @@ function App() {
       element: (
         <>
           <div id="main">
-            <Searchbar />
+            
             <Main />
           </div>
         </>

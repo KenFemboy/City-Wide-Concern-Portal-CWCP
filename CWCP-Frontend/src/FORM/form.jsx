@@ -6,7 +6,8 @@ const FormModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
-    timestamp: new Date().toISOString().slice(0, 16),
+    // 👇 Only store date string (no time)
+    timestamp: new Date().toISOString().split("T")[0], // "2025-10-06"
     photo: null,
     area: "",
     severity: "",
@@ -32,8 +33,16 @@ const FormModal = () => {
 
     try {
       const data = new FormData();
+
+      // 👇 Convert to MM/DD/YYYY before sending (optional)
+      const formattedDate = new Date(formData.timestamp).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      });
+
       data.append("title", formData.title);
-      data.append("timestamp", formData.timestamp);
+      data.append("timestamp", formattedDate); // now sends "10/06/2025"
       data.append("photo", formData.photo);
       data.append("area", formData.area);
       data.append("severity", formData.severity);
@@ -65,9 +74,7 @@ const FormModal = () => {
       {isOpen && (
         <div className="modal-overlay" onClick={toggleModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="close-btn" onClick={toggleModal}>
-              ✖
-            </button>
+            <button className="close-btn" onClick={toggleModal}>✖</button>
             <h2>Submit a New Concern</h2>
             <p className="modal-subtitle">
               Help us improve the community by reporting issues you encounter.
@@ -89,7 +96,7 @@ const FormModal = () => {
 
               {/* Timestamp */}
               <div className="form-group">
-                <label htmlFor="timestamp">Timestamp</label>
+                <label htmlFor="timestamp">Date</label>
                 <input
                   type="date"
                   id="timestamp"
@@ -121,7 +128,6 @@ const FormModal = () => {
                   onChange={handleChange}
                 >
                   <option value="">-- Choose an Area --</option>
-                  <option value="">All Areas</option>
                   <option value="apokon">Apokon</option>
                   <option value="bincungan">Bincungan</option>
                   <option value="busaon">Busaon</option>

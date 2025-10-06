@@ -34,7 +34,7 @@ const Cards = ({ _id, title, area, comment, status, severity, timestamp, photo, 
 
       if (res.ok) {
         alert("✅ Post approved successfully!");
-        window.location.reload();
+        
       } else {
         const err = await res.json().catch(() => ({}));
         alert(`Error: ${err.message || err.errorMessage || "Failed to approve post"}`);
@@ -53,7 +53,7 @@ const Cards = ({ _id, title, area, comment, status, severity, timestamp, photo, 
 
       if (res.ok) {
         alert("❌ Post rejected successfully!");
-        window.location.reload();
+        
       } else {
         const err = await res.json().catch(() => ({}));
         alert(`Error: ${err.message || err.errorMessage || "Failed to reject post"}`);
@@ -74,7 +74,7 @@ const Cards = ({ _id, title, area, comment, status, severity, timestamp, photo, 
 
       if (res.ok) {
         alert("🗑️ Post deleted permanently!");
-        window.location.reload();
+        
       } else {
         const err = await res.json().catch(() => ({}));
         alert(`Error: ${err.message || err.errorMessage || "Failed to delete post"}`);
@@ -97,7 +97,7 @@ const Cards = ({ _id, title, area, comment, status, severity, timestamp, photo, 
 
       if (res.ok) {
         alert(`🔁 Status changed to "${newStatus}"`);
-        window.location.reload();
+        
       } else {
         const err = await res.json().catch(() => ({}));
         alert(`Error: ${err.message || err.errorMessage || "Failed to update status"}`);
@@ -154,7 +154,7 @@ const Cards = ({ _id, title, area, comment, status, severity, timestamp, photo, 
         <h5>{area}</h5>
         <div className="meta">
           <span>Severity: {severity}</span>
-          <span>Reported: {new Date(timestamp).toLocaleString()}</span>
+          <span>Reported: {new Date(timestamp).toLocaleDateString()}</span>
         </div>
         <div className="details">
           <p>

@@ -1,15 +1,46 @@
-import React from 'react'
-import './searchbar.css'
-const searchbar = () => {
-    return (
+import React, { useState } from "react";
+import "./searchbar.css";
 
-        <div className="header">
-            <h1>See something? Do Something!</h1>
-            <input type="text" placeholder="Search by area, issue, or status..." />
+const Searchbar = ({ setPosts }) => {
+  const [query, setQuery] = useState("");
 
-        </div>
+  const handleSearch = async (e) => {
+    const value = e.target.value;
+    setQuery(value);
 
-    )
-}
+    // If empty, load all approved posts again
+    if (!value.trim()) {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/getApproved`);
+      const data = await res.json();
+      setPosts(data);
+      return;
+    }
 
-export default searchbar
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/search?query=${encodeURIComponent(value)}`
+      );
+      if (res.ok) {
+        const data = await res.json();
+        setPosts(data);
+      } else {
+        setPosts([]); // clear if no matches
+      }
+    } catch (err) {
+      console.error("Search failed:", err);
+    }
+  };
+
+  return (
+    <div className="searchbar">
+      <input
+        type="text"
+        placeholder="🔍 Search by title..."
+        value={query}
+        onChange={handleSearch}
+      />
+    </div>
+  );
+};
+
+export default Searchbar;
