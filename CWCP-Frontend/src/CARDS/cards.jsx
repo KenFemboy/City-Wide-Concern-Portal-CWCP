@@ -34,7 +34,6 @@ const Cards = ({ _id, title, area, comment, status, severity, timestamp, photo, 
 
       if (res.ok) {
         alert("✅ Post approved successfully!");
-        
       } else {
         const err = await res.json().catch(() => ({}));
         alert(`Error: ${err.message || err.errorMessage || "Failed to approve post"}`);
