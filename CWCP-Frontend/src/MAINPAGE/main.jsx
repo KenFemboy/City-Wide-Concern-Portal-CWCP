@@ -5,14 +5,15 @@ import axios from "axios";
 import "./main.css";
 import Cards from "../CARDS/cards.jsx";
 import Form from "../FORM/form.jsx";
-import SidebarLeft from "../SIDEBAR-LEFT/sidebar_left.jsx"; // 👈 import your sidebar
+import SidebarLeft from "../SIDEBAR-LEFT/sidebar_left.jsx";
+import Searchbar from "../SEARCHBAR/searchbar.jsx";
 
 const Main = () => {
   const [posts, setPosts] = useState([]);
   const [filters, setFilters] = useState({ area: "", severity: "", status: "" });
   const location = useLocation();
 
-  // 🔹 Fetch data
+  // 🔹 Fetch data every 5 seconds
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -27,7 +28,11 @@ const Main = () => {
         console.log("Unable to retrieve data", error);
       }
     };
-    fetchData();
+
+    fetchData(); // Run immediately
+    const interval = setInterval(fetchData, 2000); // Run every 5 seconds
+
+    return () => clearInterval(interval); // Cleanup on unmount or path change
   }, [location.pathname]);
 
   // 🔹 Filtered posts
@@ -43,6 +48,7 @@ const Main = () => {
     return matchesArea && matchesSeverity && matchesStatus;
   });
 
+  // 🔹 Show form only on homepage
   const renderButtons = () => {
     if (location.pathname === "/") {
       return <Form />;
@@ -54,7 +60,7 @@ const Main = () => {
     <div className="main-container">
       {/* 🔹 Sidebar with filters */}
       <SidebarLeft filters={filters} setFilters={setFilters} />
-
+      <Searchbar setPosts={setPosts} />
       <div className="main">
         {renderButtons()}
 
