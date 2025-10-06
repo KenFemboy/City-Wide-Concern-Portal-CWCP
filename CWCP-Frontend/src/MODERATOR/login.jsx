@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./login.css";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
@@ -20,7 +22,7 @@ const Login = () => {
 
       // Optionally, store login info or redirect:
       // localStorage.setItem("admin", JSON.stringify(res.data.admin));
-      window.location.href = "/dashboard";
+       navigate("/dashboard");
 
     } catch (err) {
       setMessage(err.response?.data?.errorMessage || "Login failed");
