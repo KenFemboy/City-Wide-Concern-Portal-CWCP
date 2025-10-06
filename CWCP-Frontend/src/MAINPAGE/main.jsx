@@ -59,8 +59,11 @@ const Main = () => {
   return (
     <div className="main-container">
       {/* 🔹 Sidebar with filters */}
-      <SidebarLeft filters={filters} setFilters={setFilters} />
+      <div id="filters">
+        <SidebarLeft filters={filters} setFilters={setFilters} />
       <Searchbar setPosts={setPosts} />
+      </div>
+      
       <div className="main">
         {renderButtons()}
 

@@ -152,7 +152,7 @@ const Cards = ({ _id, title, area, comment, status, severity, timestamp, photo, 
         <h5>{area}</h5>
         <div className="meta">
           <span>Severity: {severity}</span>
-          <span>Reported: {new Date(timestamp).toLocaleString()}</span>
+          <span>Reported: {new Date(timestamp).toLocaleDateString()}</span>
         </div>
         <div className="details">
           <p>
