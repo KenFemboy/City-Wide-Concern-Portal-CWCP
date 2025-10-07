@@ -1,15 +1,15 @@
-/* Background and General Layout */
+
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
   color: white;
-  background: url('bg.webp') no-repeat center center fixed;
+  background: #dfe879;
   background-size: cover;
 }
 
-/* Banner Section */
+
 .banner {
-  background-color: rgba(102, 178, 255, 0.6);
+  background-color: rgba(56, 102, 148, 0.6);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -31,7 +31,7 @@ body {
   color: #111;
 }
 
-/* Filters Section */
+
 .filters {
   display: flex;
   flex-wrap: wrap;
@@ -41,7 +41,7 @@ body {
 }
 
 .filters label {
-  color: white;
+  color: rgb(20, 20, 20);
   font-weight: 500;
 }
 
@@ -69,7 +69,6 @@ body {
   background-color: #007700;
 }
 
-/* Concern Card */
 .concern-card {
   background-color: rgba(0, 0, 0, 0.8);
   width: 300px;
@@ -114,7 +113,7 @@ body {
   margin-top: 6px;
 }
 
-/* Card Buttons */
+
 .card-buttons {
   margin-top: 10px;
 }
@@ -133,9 +132,9 @@ body {
   background-color: #999;
 }
 
-/* Members Section */
+
 .members {
-  color: white;
+  color: rgb(19, 18, 18);
   padding: 30px 40px;
 }
 
@@ -177,7 +176,6 @@ body {
   opacity: 0.8;
 }
 
-/* Responsive */
 @media (max-width: 700px) {
   .filters {
     flex-direction: column;

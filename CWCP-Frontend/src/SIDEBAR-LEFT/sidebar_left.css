@@ -1,38 +1,102 @@
-.cwcp-logo {
-  display: flex;
-}
-.cwcp-logo img {
-  width: 20%;
-  margin: 3px;
+/* 🔹 Filter Modal Trigger Button */
+.open-modal-btn {
+  
+  top: 200px;
+  left: 20px;
+  background-color: #009900;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+  z-index: 1000;
 }
 
-.sidebar {
+.open-modal-btn:hover {
+  background-color: #007700;
+}
+
+/* 🔹 Modal Overlay */
+.modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 220px;
-  background: #f6f1e8;
-  padding: 20px;
-  height: 100vh;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
-  z-index: 100;
+  width: 100%;
+  height: 100%;
+  background: rgba(20, 20, 20, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1500;
 }
 
-.sidebar h2 {
+/* 🔹 Modal Box */
+.modal-content {
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 12px;
+  width: 350px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  position: relative;
+  animation: fadeIn 0.3s ease;
+}
+
+/* 🔹 Modal Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.modal-header h2 {
+  margin: 0;
+  color: #222;
+}
+
+.close-btn {
+  background: none;
+  border: none;
   font-size: 20px;
-  color: #1f3d1f;
-  margin-bottom: 20px;
+  cursor: pointer;
+  color: #444;
+  transition: 0.3s;
 }
 
-.sidebar h3 {
-  font-size: 16px;
-  margin: 15px 0 5px;
-  color: #1f3d1f;
+.close-btn:hover {
+  color: red;
 }
 
-.sidebar label {
-  display: block;
-  margin: 4px 0;
-  font-size: 14px;
+/* 🔹 Modal Body */
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal-body label {
+  font-weight: 500;
   color: #333;
+}
+
+.modal-body select {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background: #f3f3f3;
+  color: #222;
+  outline: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -27,8 +27,8 @@ function App() {
           <div id="main">
             <Main />
           </div>
-          <Credits />
-          <TestLinks />
+          {/* <Credits />
+          <TestLinks /> */}
         </>
       ),
     },

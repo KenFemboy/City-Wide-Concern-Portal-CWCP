@@ -13,7 +13,7 @@ const Main = () => {
   const [filters, setFilters] = useState({ area: "", severity: "", status: "" });
   const location = useLocation();
 
-  // 🔹 Fetch data every 5 seconds
+  // 🔹 Fetch posts periodically
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -29,13 +29,12 @@ const Main = () => {
       }
     };
 
-    fetchData(); // Run immediately
-    const interval = setInterval(fetchData, 2000); // Run every 5 seconds
-
-    return () => clearInterval(interval); // Cleanup on unmount or path change
+    fetchData();
+    const interval = setInterval(fetchData, 2000);
+    return () => clearInterval(interval);
   }, [location.pathname]);
 
-  // 🔹 Filtered posts
+  // 🔹 Apply filters
   const filteredPosts = posts.filter((concern) => {
     const matchesArea =
       !filters.area || concern.area?.toLowerCase() === filters.area.toLowerCase();
@@ -48,32 +47,40 @@ const Main = () => {
     return matchesArea && matchesSeverity && matchesStatus;
   });
 
-  // 🔹 Show form only on homepage
-  const renderButtons = () => {
-    if (location.pathname === "/") {
-      return <Form />;
-    }
-    return null;
-  };
-
   return (
-    <div className="main-container">
-      {/* 🔹 Sidebar with filters */}
-      <div id="filters">
-        <SidebarLeft filters={filters} setFilters={setFilters} />
-      <Searchbar setPosts={setPosts} />
-      </div>
-      
-      <div className="main">
-        {renderButtons()}
+    <div className="dashboard">
 
+
+      {/* Main Content */}
+      <div className="dashboard-main">
+        <header className="dashboard-header">
+          <div className="header-left">
+            <img src="./CWCP-LOGO.svg" alt="CWCP Logo" className="header-logo" />
+            <p className="header-tagline">See Something? Do Something</p>
+          </div>
+
+          <div className="header-right">
+            <SidebarLeft filters={filters} setFilters={setFilters} />
+            <Searchbar setPosts={setPosts} />
+          </div>
+        </header>
+
+
+
+        {/* Sidebar */}
+
+
+        {/* Show form on homepage */}
+        {location.pathname === "/" && <Form />}
+
+        {/* Posts */}
         <div className="cards">
           {filteredPosts.length === 0 ? (
             <h1 id="noposts">No concerns found.</h1>
           ) : (
-            filteredPosts.map((concern, idx) => (
+            filteredPosts.map((concern) => (
               <Cards
-                key={idx}
+                key={concern._id}
                 _id={concern._id}
                 title={concern.title}
                 area={concern.area}

@@ -1,24 +1,138 @@
-.main{
+/* Dashboard Container */
+.dashboard {
   display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-}
-#noposts{
-  margin: 200px auto;
-  font-size: 10vh;
-}
-
-.cards{
+  flex-direction: column;
+  height: 100vh;
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  background-color: #f7f8fa;
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
 }
 
+/* Main Section */
+.dashboard-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  height: 100%;
+  padding: 20px 40px;
+  box-sizing: border-box;
+}
 
+/* Header Section */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  padding: 15px 25px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  margin-bottom: 20px;
+}
 
+/* Left side: logo + tagline */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
 
+.header-logo {
+  height: 50px;
+  width: 50px;
+  object-fit: contain;
+}
+
+.header-tagline {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  white-space: nowrap;
+}
+
+/* Right side: filters + searchbar */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Ensure filter modal button integrates cleanly */
+.open-modal-btn {
+  background-color: #009900;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.open-modal-btn:hover {
+  background-color: #007a00;
+}
+
+/* Make it responsive */
+@media (max-width: 768px) {
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .header-left {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .header-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .header-tagline {
+    font-size: 0.9rem;
+  }
+}
+
+/* Cards Container */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+#noposts {
+  margin: 150px auto;
+  font-size: 2rem;
+  color: #666;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .dashboard > .sidebar-left {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .dashboard-main {
+    padding: 10px 20px;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
