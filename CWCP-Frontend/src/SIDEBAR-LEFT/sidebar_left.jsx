@@ -18,14 +18,14 @@ const Sidebar_Left = ({ filters, setFilters }) => {
 
       {/* 🔹 Modal Overlay */}
       {isOpen && (
-        <div className="modal-overlay" onClick={() => setIsOpen(false)}>
+        <div className="modal-overlay-sidebar" onClick={() => setIsOpen(false)}>
           <div
-            className="modal-content"
+            className="modal-content-sidebar"
             onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
           >
             <div className="modal-header">
               <h2>Filters</h2>
-              <button className="close-btn" onClick={() => setIsOpen(false)}>
+              <button className="close-btn-sidebar" onClick={() => setIsOpen(false)}>
                 ✖
               </button>
             </div>

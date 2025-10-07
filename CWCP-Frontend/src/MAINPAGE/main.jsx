@@ -60,6 +60,7 @@ const Main = () => {
           </div>
 
           <div className="header-right">
+            {location.pathname === "/" && <Form />}
             <SidebarLeft filters={filters} setFilters={setFilters} />
             <Searchbar setPosts={setPosts} />
           </div>
@@ -71,7 +72,7 @@ const Main = () => {
 
 
         {/* Show form on homepage */}
-        {location.pathname === "/" && <Form />}
+        
 
         {/* Posts */}
         <div className="cards">

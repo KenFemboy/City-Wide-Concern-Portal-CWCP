@@ -73,7 +73,7 @@ const FormModal = () => {
 
       {isOpen && (
         <div className="modal-overlay" onClick={toggleModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+          <div className="modal-content-form" onClick={(e) => e.stopPropagation()}>
             <button className="close-btn" onClick={toggleModal}>✖</button>
             <h2>Submit a New Concern</h2>
             <p className="modal-subtitle">

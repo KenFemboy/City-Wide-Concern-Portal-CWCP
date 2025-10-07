@@ -1,72 +1,72 @@
-/* 🔹 Filter Modal Trigger Button */
+/* 🔹 Button to open modal */
 .open-modal-btn {
-  
-  top: 200px;
-  left: 20px;
-  background-color: #009900;
+  background-color: rgb(124, 179, 66);
   color: white;
   border: none;
-  padding: 10px 18px;
-  border-radius: 6px;
+  border-radius: 8px;
+  padding: 10px 16px;
   cursor: pointer;
-  font-weight: 600;
-  transition: 0.3s;
-  z-index: 1000;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background 0.3s ease;
 }
 
 .open-modal-btn:hover {
-  background-color: #007700;
+  background-color: #0056b3;
 }
 
 /* 🔹 Modal Overlay */
-.modal-overlay {
+.modal-overlay-sidebar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(20, 20, 20, 0.6);
+  background: rgba(30, 30, 30, 0.5);
+  backdrop-filter: blur(4px);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1500;
-}
-
-/* 🔹 Modal Box */
-.modal-content {
-  background: #fff;
-  padding: 25px 30px;
-  border-radius: 12px;
-  width: 350px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-  position: relative;
+  z-index: 2000;
   animation: fadeIn 0.3s ease;
 }
 
-/* 🔹 Modal Header */
+/* 🔹 Modal Box */
+.modal-content-sidebar {
+  background: #ffffff;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 420px;
+  padding: 24px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.3s ease;
+}
+
+/* 🔹 Header inside modal */
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
+  border-bottom: 2px solid #eee;
+  margin-bottom: 16px;
 }
 
 .modal-header h2 {
-  margin: 0;
-  color: #222;
+  font-size: 20px;
+  color: #333;
 }
 
-.close-btn {
-  background: none;
+.close-btn-sidebar {
+  background: transparent;
   border: none;
-  font-size: 20px;
+  font-size: 22px;
+  color: #555;
   cursor: pointer;
-  color: #444;
-  transition: 0.3s;
+  transition: color 0.3s ease;
 }
 
 .close-btn:hover {
-  color: red;
+  color: #000;
 }
 
 /* 🔹 Modal Body */
@@ -82,21 +82,35 @@
 }
 
 .modal-body select {
-  padding: 8px;
-  border-radius: 5px;
+  padding: 8px 12px;
   border: 1px solid #ccc;
-  background: #f3f3f3;
-  color: #222;
+  border-radius: 8px;
+  font-size: 15px;
   outline: none;
+  transition: border-color 0.2s;
 }
 
+.modal-body select:focus {
+  border-color: #007bff;
+}
+
+/* 🔹 Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(-15px);
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
     transform: translateY(0);
+    opacity: 1;
   }
 }
