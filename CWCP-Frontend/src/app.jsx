@@ -3,10 +3,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // Elements
 import Main from "./MAINPAGE/main.jsx";
-import Searchbar from "./SEARCHBAR/searchbar.jsx";
 import Mod from "./MODERATOR/login.jsx";
-import Credits from "./Credits/credits.jsx";
-import TestLinks from "./Credits/testlinks.jsx";
+import Credits from './Credits/credits.jsx'
 import LoadingScreen from "./LoadingScreen/loadingscreen.jsx"
 
 
@@ -26,9 +24,9 @@ function App() {
         <>
           <div id="main">
             <Main />
+            <Credits/>
           </div>
-          {/* <Credits />
-          <TestLinks /> */}
+          
         </>
       ),
     },

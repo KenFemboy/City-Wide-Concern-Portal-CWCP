@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 import "./main.css";
 import Cards from "../CARDS/cards.jsx";
 import Form from "../FORM/form.jsx";
@@ -12,6 +12,7 @@ const Main = () => {
   const [posts, setPosts] = useState([]);
   const [filters, setFilters] = useState({ area: "", severity: "", status: "" });
   const location = useLocation();
+  const navigate = useNavigate();
 
   // 🔹 Fetch posts periodically
   useEffect(() => {
@@ -55,7 +56,13 @@ const Main = () => {
       <div className="dashboard-main">
         <header className="dashboard-header">
           <div className="header-left">
-            <img src="./CWCP-LOGO.svg" alt="CWCP Logo" className="header-logo" />
+            <img
+              src="./CWCP-LOGO.svg"
+              alt="CWCP Logo"
+              className="header-logo"
+              onClick={() => navigate("/")}
+              style={{ cursor: "pointer" }}
+            />
             <p className="header-tagline">See Something? Do Something</p>
           </div>
 
@@ -72,7 +79,7 @@ const Main = () => {
 
 
         {/* Show form on homepage */}
-        
+
 
         {/* Posts */}
         <div className="cards">

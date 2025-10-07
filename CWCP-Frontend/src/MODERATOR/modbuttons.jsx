@@ -1,13 +1,14 @@
 import React from 'react'
-
+import { Navigate, useNavigate } from 'react-router-dom'
 const modbuttons = () => {
+  const navigate = useNavigate();
 
   return (
     <div>
-      <div className="modbuttons">
-          <button id="approve">Approve</button>
-          <button id="delete">Delete</button>
-        </div>
+      <button
+        alt="CWCP Logo"
+        onClick={() => navigate("/mod")}
+      >Moderator Login</button>
     </div>
   )
 }
