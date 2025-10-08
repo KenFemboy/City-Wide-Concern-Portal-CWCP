@@ -6,7 +6,7 @@ import Main from "./MAINPAGE/main.jsx";
 import Mod from "./MODERATOR/login.jsx";
 import Credits from './Credits/credits.jsx'
 import LoadingScreen from "./LoadingScreen/loadingscreen.jsx"
-
+import Error from "./Error/error.jsx";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -45,6 +45,14 @@ function App() {
         </>
       ),
     },
+    {
+      path:"*",
+      element:(
+        <>
+          <Error/>
+        </>
+      )
+    }
   ]);
 
   return (
