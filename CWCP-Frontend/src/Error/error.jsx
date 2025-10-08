@@ -1,13 +1,15 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from "react";
+import { Link } from "react-router-dom";
+import "./error.css";
 
-const error = () => {
-  return (
+const ErrorPage = () => (
+  <div className="error-page">
+    <img src="CWCP-LOGO.svg" alt="CWCP Logo" />
     <div>
-        <h1>Error</h1>
-        <Link to="/">Click here to go back</Link>
+      <h1>Error</h1>
+      <Link to="/">Click here to go back</Link>
     </div>
-  )
-}
+  </div>
+);
 
-export default error
+export default ErrorPage;

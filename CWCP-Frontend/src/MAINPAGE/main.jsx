@@ -3,6 +3,8 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./main.css";
+
+
 import Cards from "../CARDS/cards.jsx";
 import Form from "../FORM/form.jsx";
 import SidebarLeft from "../SIDEBAR-LEFT/sidebar_left.jsx";
