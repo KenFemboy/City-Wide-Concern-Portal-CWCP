@@ -107,6 +107,7 @@
   flex-wrap: wrap;
   gap: 20px;
   align-items: flex-start;
+  justify-content: space-evenly;
 }
 
 #noposts {
@@ -135,4 +136,15 @@
     flex-direction: column;
     gap: 10px;
   }
+}
+
+
+/* Hide scrollbar but keep scroll functionality */
+.dashboard-main {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.dashboard-main::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }

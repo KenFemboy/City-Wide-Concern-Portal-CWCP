@@ -7,7 +7,7 @@ import Mod from "./MODERATOR/login.jsx";
 import Credits from './Credits/credits.jsx'
 import LoadingScreen from "./LoadingScreen/loadingscreen.jsx"
 import Error from "./Error/error.jsx";
-
+import Statistics from "./Stats/statistics.jsx";
 function App() {
   const [loading, setLoading] = useState(true);
 
@@ -38,9 +38,9 @@ function App() {
       path: "/dashboard",
       element: (
         <>
-          <div id="main">
-            
+          <div id="main">           
             <Main />
+            <Statistics/>
           </div>
         </>
       ),
@@ -52,7 +52,17 @@ function App() {
           <Error/>
         </>
       )
-    }
+    },
+    {
+      path: "/statistics",
+      element: (
+        <>
+          <div id="main">           
+            <Statistics/>
+          </div>
+        </>
+      ),
+    },
   ]);
 
   return (
