@@ -5,7 +5,7 @@
   height: 100vh;
   width: 100%;
   background-color: #f7f8fa;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   overflow: hidden;
 }
 
@@ -62,7 +62,6 @@
   gap: 15px;
 }
 
-/* Ensure filter modal button integrates cleanly */
 .open-modal-btn {
   background-color: #009900;
   color: white;
@@ -76,29 +75,6 @@
 
 .open-modal-btn:hover {
   background-color: #007a00;
-}
-
-/* Make it responsive */
-@media (max-width: 768px) {
-  .dashboard-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  .header-left {
-    justify-content: center;
-    width: 100%;
-  }
-
-  .header-right {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .header-tagline {
-    font-size: 0.9rem;
-  }
 }
 
 /* Cards Container */
@@ -116,7 +92,18 @@
   color: #666;
 }
 
-/* Responsive */
+/* Hide scrollbar but keep scroll functionality */
+.dashboard-main {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+.dashboard-main::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* --------------------- Responsive --------------------- */
+
+/* Tablet view */
 @media (max-width: 900px) {
   .dashboard {
     flex-direction: column;
@@ -129,22 +116,70 @@
   }
 
   .dashboard-main {
-    padding: 10px 20px;
+    padding: 15px 20px;
   }
 
   .dashboard-header {
     flex-direction: column;
     gap: 10px;
   }
+
+  .header-right {
+    width: 100%;
+    justify-content: space-between;
+  }
 }
 
+/* Mobile view */
+@media (max-width: 480px) {
+  .dashboard-main {
+    padding: 10px 15px;
+  }
 
-/* Hide scrollbar but keep scroll functionality */
-.dashboard-main {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
-}
+  .dashboard-header {
+    padding: 10px 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
 
-.dashboard-main::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  .header-left {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .header-logo {
+    height: 40px;
+    width: 40px;
+  }
+
+  .header-tagline {
+    font-size: 0.85rem;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .header-right {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .open-modal-btn {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .cards {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  #noposts {
+    margin: 80px auto;
+    font-size: 1.4rem;
+    text-align: center;
+  }
 }
