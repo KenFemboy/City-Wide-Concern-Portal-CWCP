@@ -4,7 +4,7 @@ import { createPost } from "../controller/createPost.js";
 import { fetchPosts,getApprovedPosts, fetchPostsViaSearchbar } from "../controller/fetchPosts.js";
 import { approvePost, rejectPost, deletePost, changeStatus } from "../controller/postController.js";
 import { adminLogin } from "../authentication/adminLogin.js";
-import { getPostStats } from "../statistics/statistics.js";
+import { getPostStats,getAreaStats } from "../statistics/statistics.js";
 
 
 
@@ -18,7 +18,7 @@ route.post("/login", adminLogin);
 route.put("/approve/:id", approvePost);
 route.put("/reject/:id", rejectPost);
 route.put("/status/:id", changeStatus);
-
+route.get("/posts/area/:area", getAreaStats);
 route.delete("/delete/:id", deletePost)
 
 

@@ -8,6 +8,8 @@ import Credits from './Credits/credits.jsx'
 import LoadingScreen from "./LoadingScreen/loadingscreen.jsx"
 import Error from "./Error/error.jsx";
 import Statistics from "./Stats/statistics.jsx";
+import Gmap from "./GMAP/gmap.jsx";
+import GMAP2 from "./GMAP/gmap2.jsx"
 function App() {
   const [loading, setLoading] = useState(true);
 
@@ -23,8 +25,12 @@ function App() {
       element: (
         <>
           <div id="main">
-            <Main />
-            <Credits/>
+            {/* <Main />
+            <Credits/> */}
+
+            {/* <Gmap apiKey={import.meta.env.VITE_GMAP_API}/> */}
+            <GMAP2 apiKey={import.meta.env.VITE_GMAP_API}/>
+            <Statistics/>
           </div>
           
         </>
@@ -59,6 +65,7 @@ function App() {
         <>
           <div id="main">           
             <Statistics/>
+            
           </div>
         </>
       ),
