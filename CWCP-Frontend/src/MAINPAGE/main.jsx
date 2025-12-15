@@ -1,29 +1,52 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import "./main.css";
-
 
 import Cards from "../CARDS/cards.jsx";
 import Form from "../FORM/form.jsx";
-import SidebarLeft from "../SIDEBAR-LEFT/sidebar_left.jsx";
-import Searchbar from "../SEARCHBAR/searchbar.jsx";
+import Filter from "../FILTER/filters.jsx";
+import Home from "../home/home.jsx"
+import HeaderFrame from "../HeaderFrame/HeaderFrame.jsx";
+import AllConcerns from "../CARDS/Categories/AllConcerns.jsx";
+import Resolved from "../CARDS/Categories/Resolved.jsx";
+import Pending from "../CARDS/Categories/Pending.jsx";
+import Rejected from "../CARDS/Categories/Rejected.jsx";
+import Statistics from "../Stats/statistics.jsx";
+import GMap from "../GMAP/gmap.jsx";
+
 
 const Main = () => {
   const [posts, setPosts] = useState([]);
-  const [filters, setFilters] = useState({ area: "", severity: "", status: "" });
+  const [filters, setFilters] = useState({
+    area: "",
+    severity: "",
+    status: "",
+  });
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeView, setActiveView] = useState("home"); // 'home' or 'concerns'
   const location = useLocation();
   const navigate = useNavigate();
 
-  // 🔹 Fetch posts periodically
+  // Determine if we're on moderator page
+  const isModeratorPage = location.pathname !== "/";
+
+  // Set activeView based on location
+  useEffect(() => {
+    if (location.pathname === "/dashboard") {
+      setActiveView("all");
+    } else {
+      setActiveView("home");
+    }
+  }, [location.pathname]);
+
+  // Fetch posts periodically
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const endpoint =
-          location.pathname === "/"
-            ? `${import.meta.env.VITE_API_URL}/getApproved`
-            : `${import.meta.env.VITE_API_URL}/fetch`;
+        const endpoint = `${import.meta.env.VITE_API_URL}/fetch`; // Always fetch all posts
 
         const response = await axios.get(endpoint);
         setPosts(response.data);
@@ -32,78 +55,172 @@ const Main = () => {
       }
     };
 
+
     fetchData();
     const interval = setInterval(fetchData, 2000);
     return () => clearInterval(interval);
   }, [location.pathname]);
 
-  // 🔹 Apply filters
+  // Apply filters
   const filteredPosts = posts.filter((concern) => {
     const matchesArea =
-      !filters.area || concern.area?.toLowerCase() === filters.area.toLowerCase();
+      !filters.area ||
+      concern.area?.toLowerCase() === filters.area.toLowerCase();
     const matchesSeverity =
       !filters.severity ||
       concern.severity?.toLowerCase() === filters.severity.toLowerCase();
     const matchesStatus =
       !filters.status ||
       concern.status?.toLowerCase() === filters.status.toLowerCase();
-    return matchesArea && matchesSeverity && matchesStatus;
+
+    // Search filter
+    const matchesSearch = !searchQuery ||
+      concern.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      concern.description?.toLowerCase().includes(searchQuery.toLowerCase());
+
+    return matchesArea && matchesSeverity && matchesStatus && matchesSearch;
   });
 
+  // Check if any filters are active
+  const hasActiveFilters = filters.area || filters.severity || filters.status;
+
   return (
-    <div className="dashboard">
+    <div className="user-mainpage">
+      <div className="dashboard">
+        {/* Header Frame */}
+        <HeaderFrame
+          isModeratorPage={isModeratorPage}
+          activeView={activeView}
+          setActiveView={setActiveView}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          setIsFormOpen={setIsFormOpen}
+          setIsFilterOpen={setIsFilterOpen}
+          hasActiveFilters={hasActiveFilters}
+          filters={filters}
+          setFilters={setFilters}
+        />
 
 
-      {/* Main Content */}
-      <div className="dashboard-main">
-        <header className="dashboard-header">
-          <div className="header-left">
-            <img
-              src="./CWCP-LOGO.svg"
-              alt="CWCP Logo"
-              className="header-logo"
-              onClick={() => navigate("/")}
-              style={{ cursor: "pointer" }}
-            />
-            <p className="header-tagline">See Something? Do Something</p>
+        {/* Filter Modal */}
+        {isFilterOpen && (
+          <div className="modal-overlay-sidebar" onClick={() => setIsFilterOpen(false)}>
+            <div
+              className="modal-content-sidebar"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="modal-header">
+                <h2>Filters</h2>
+                <button className="close-btn-sidebar" onClick={() => setIsFilterOpen(false)}>
+                  ✖
+                </button>
+              </div>
+
+              <div className="modal-body">
+                <label>Area:</label>
+                <select
+                  name="area"
+                  value={filters?.area || ""}
+                  onChange={(e) => setFilters((prev) => ({ ...prev, area: e.target.value }))}
+                >
+                  <option value="">All Areas</option>
+                  <option value="apokon">Apokon</option>
+                  <option value="bincungan">Bincungan</option>
+                  <option value="busaon">Busaon</option>
+                  <option value="canocotan">Canocotan</option>
+                  <option value="cuambogan">Cuambogan</option>
+                  <option value="la-filipina">La Filipina</option>
+                  <option value="liboganon">Liboganon</option>
+                  <option value="madaum">Madaum</option>
+                  <option value="magdum">Magdum</option>
+                  <option value="mankilam">Mankilam</option>
+                  <option value="new-balamban">New Balamban</option>
+                  <option value="nueva-fuerza">Nueva Fuerza</option>
+                  <option value="pagsabangan">Pagsabangan</option>
+                  <option value="pandapan">Pandapan</option>
+                  <option value="magugpo-poblacion">Magugpo Poblacion</option>
+                  <option value="san-agustin">San Agustin</option>
+                  <option value="san-isidro">San Isidro</option>
+                  <option value="san-miguel-camp-4">San Miguel (Camp 4)</option>
+                  <option value="visayan-village">Visayan Village</option>
+                  <option value="magugpo-east">Magugpo East</option>
+                  <option value="magugpo-north">Magugpo North</option>
+                  <option value="magugpo-south">Magugpo South</option>
+                  <option value="magugpo-west">Magugpo West</option>
+                </select>
+
+                <label>Severity:</label>
+                <select
+                  name="severity"
+                  value={filters?.severity || ""}
+                  onChange={(e) => setFilters((prev) => ({ ...prev, severity: e.target.value }))}
+                >
+                  <option value="">All Severity</option>
+                  <option value="inconvenient">Inconvenient</option>
+                  <option value="hazard">Hazard</option>
+                  <option value="life-threatening">Life-Threatening</option>
+                </select>
+
+                <label>Status:</label>
+                <select
+                  name="status"
+                  value={filters?.status || ""}
+                  onChange={(e) => setFilters((prev) => ({ ...prev, status: e.target.value }))}
+                >
+                  <option value="">All Status</option>
+                  <option value="pending">Pending</option>
+                  <option value="in-progress">In Progress</option>
+                  <option value="resolved">Resolved</option>
+                </select>
+              </div>
+            </div>
           </div>
+        )}
 
-          <div className="header-right">
-            {location.pathname === "/" && <Form />}
-            <SidebarLeft filters={filters} setFilters={setFilters} />
-            <Searchbar setPosts={setPosts} />
+        {/* Main Content */}
+        <div className="dashboard-layout">
+          {/* LEFT: Statistics */}
+          <aside className="dashboard-stats">
+            <Statistics />
+          </aside>
+
+          {/* RIGHT: Main Content */}
+          <div className="dashboard-content">
+            {activeView === "home" && !isModeratorPage && <Home />}
+
+            {activeView === "all" && <AllConcerns posts={filteredPosts} />}
+
+            {activeView === "resolved" && <Resolved posts={filteredPosts} />}
+
+            {activeView === "pending" && <Pending posts={filteredPosts} />}
+
+            {activeView === "rejected" && <Rejected posts={filteredPosts} />}
+
+            {activeView === "map" && <GMap />}
           </div>
-        </header>
-
-
-
-        {/* Sidebar */}
-
-
-        {/* Show form on homepage */}
-
-
-        {/* Posts */}
-        <div className="cards">
-          {filteredPosts.length === 0 ? (
-            <h1 id="noposts">No concerns found.</h1>
-          ) : (
-            filteredPosts.map((concern) => (
-              <Cards
-                key={concern._id}
-                _id={concern._id}
-                title={concern.title}
-                area={concern.area}
-                comment={concern.description}
-                status={concern.status || "pending"}
-                severity={concern.severity}
-                timestamp={concern.timestamp}
-                photo={concern.photo}
-                approved={concern.approved}
-              />
-            ))
-          )}
         </div>
+
+        {/* Submit Concern Modal - Show on both views */}
+        {isFormOpen && (
+          <div
+            className="form-modal-backdrop"
+            onClick={() => setIsFormOpen(false)}
+          >
+            <div
+              className="form-modal"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                type="button"
+                className="form-modal-close"
+                onClick={() => setIsFormOpen(false)}
+              >
+                ×
+              </button>
+              <Form onClose={() => setIsFormOpen(false)} />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

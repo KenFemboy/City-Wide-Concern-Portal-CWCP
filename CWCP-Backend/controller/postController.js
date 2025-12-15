@@ -28,39 +28,40 @@ export const approvePost = async (req, res) => {
 
 export const rejectPost = async (req, res) => {
   try {
-    const { id } = req.params;
+    console.log("req.body:", req.body);
+const { reason } = req.body || {};
+console.log("reason:", reason);
 
-    const post = await userconcern.findById(id);
-    if (!post) {
-      return res.status(404).json({ message: "Post not found" });
-    }
 
     
-    post.approved = false;
-    await post.save();
+    if (!reason || reason.trim() === "") {
+      return res.status(400).json({
+        message: "Rejection reason is required"
+      });
+    }
 
-    res.status(200).json({ message: "Post rejected/removed successfully" });
-  } catch (error) {
-    res.status(500).json({ errorMessage: error.message });
-  }
-};
+    const post = await userconcern.findByIdAndUpdate(
+      req.params.id,
+      {
+        status: "rejected",
+        approved: false,
+        rejection_reason: reason
+      },
+      { new: true, runValidators: true }
+    );
 
-export const deletePost = async (req, res) => {
-  try {
-    const { id } = req.params;
-
-    const post = await userconcern.findById(id);
     if (!post) {
       return res.status(404).json({ message: "Post not found" });
     }
 
-    await post.deleteOne();
-
-    res.status(200).json({ message: "Post deleted successfully" });
+    res.status(200).json(post);
   } catch (error) {
-    res.status(500).json({ errorMessage: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
+
+
+
 
 export const changeStatus = async (req, res) => {
   try {

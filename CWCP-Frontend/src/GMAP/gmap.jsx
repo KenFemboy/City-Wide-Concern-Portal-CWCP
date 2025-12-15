@@ -1,117 +1,127 @@
-import React, { useEffect, useRef, useState } from "react";
-import "./gmap.css"
-// GMap.jsx
-// Simple, single-file Google Maps React component using the plain Google Maps JavaScript API.
-// Props:
-// - apiKey (string) **required**: your Google Maps JS API key
-// - center (object) optional: { lat: number, lng: number } default { lat: 14.5995, lng: 120.9842 }
-// - zoom (number) optional: default 12
-// - markers (array) optional: [{ id, position: {lat, lng}, title, info }] 
-// - mapContainerStyle (object) optional: CSS style for the map container
-// - onMapLoad (fn) optional: called with google.maps.Map instance after load
+import React, { useState } from "react";
+import {
+  APIProvider,
+  Map,
+  Marker,
+  useMap
+} from "@vis.gl/react-google-maps";
+import "./GMap.css";
 
-const GMap = ({
-  apiKey,
-  center = { lat: 14.5995, lng: 120.9842 },
-  zoom = 60,
-  markers = [],
-  mapContainerStyle = { width: "500px", height: "400px", borderRadius: 20 },
-  onMapLoad,
-}) => {
-  const mapRef = useRef(null);
-  const mapInstanceRef = useRef(null);
-  const [loaded, setLoaded] = useState(false);
+const AreaSelector = ({ setMarkerPos, setAreaStats }) => {
+  const map = useMap("main-map");
 
-  // Load the Google Maps script only once (idempotent)
-  useEffect(() => {
-    if (!apiKey) {
-      console.error("GMap: apiKey prop is required");
-      return;
-    }
+  const handleChange = async (e) => {
+    const area = e.target.value;
+    if (!area || !map) return;
 
-    // If google maps already loaded, set loaded and return
-    if (window.google && window.google.maps) {
-      setLoaded(true);
-      return;
-    }
+    // ---- GEOLOCATION ----
+    const query = `${area.replace(/-/g, " ")}, Tagum City`;
+    const geocoder = new window.google.maps.Geocoder();
 
-    const existing = document.getElementById("gmap-js-api");
-    if (existing) {
-      existing.addEventListener("load", () => setLoaded(true));
-      return;
-    }
+    geocoder.geocode({ address: query }, async (results, status) => {
+      if (status === "OK") {
+        const loc = results[0].geometry.location;
+        const pos = { lat: loc.lat(), lng: loc.lng() };
 
-    const script = document.createElement("script");
-    script.id = "gmap-js-api";
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}`;
-    script.async = true;
-    script.defer = true;
-    script.onload = () => setLoaded(true);
-    script.onerror = (err) => console.error("Failed to load Google Maps script", err);
-    document.head.appendChild(script);
-
-    return () => {
-      // keep the script for other components, but remove listener if it exists
-      script.onload = null;
-      script.onerror = null;
-    };
-  }, [apiKey]);
-
-  // Initialize map when script is loaded
-  useEffect(() => {
-    if (!loaded) return;
-    if (!mapRef.current) return;
-    if (mapInstanceRef.current) return; // already initialized
-
-    const map = new window.google.maps.Map(mapRef.current, {
-      center,
-      zoom,
-      gestureHandling: "auto",
-    });
-
-    mapInstanceRef.current = map;
-    if (typeof onMapLoad === "function") onMapLoad(map);
-  }, [loaded, center, zoom, onMapLoad]);
-
-  // Manage markers
-  useEffect(() => {
-    const map = mapInstanceRef.current;
-    if (!map) return;
-
-    // store created markers so we can clear them on update
-    const createdMarkers = [];
-    markers.forEach((m) => {
-      try {
-        const marker = new window.google.maps.Marker({
-          position: m.position,
-          map,
-          title: m.title || "",
-        });
-        createdMarkers.push(marker);
-
-        if (m.info) {
-          const infoWindow = new window.google.maps.InfoWindow({ content: String(m.info) });
-          marker.addListener("click", () => infoWindow.open(map, marker));
-        }
-      } catch (e) {
-        console.warn("Failed to create marker", m, e);
+        setMarkerPos(pos);
+        map.panTo(pos);
+        map.setZoom(15);
       }
     });
 
-    return () => {
-      createdMarkers.forEach((mk) => mk.setMap(null));
-    };
-  }, [markers, loaded]);
+    // ---- API CALL ----
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/posts/area/${area}`
+      );
+      const data = await res.json();
+      setAreaStats(data);
+    } catch (err) {
+      console.error("API Error:", err);
+    }
+  };
 
   return (
-    <div>
-      <div
-        ref={mapRef}
-        id="gmap-container"
-        style={mapContainerStyle}
-        aria-label="Google Map"
-      />
+    <div className="area-selector">
+      <h3>Select Area</h3>
+      <select onChange={handleChange} defaultValue="">
+        <option value="" disabled>Choose an area</option>
+        <option value="apokon">Apokon</option>
+        <option value="bincungan">Bincungan</option>
+        <option value="busaon">Busaon</option>
+        <option value="canocotan">Canocotan</option>
+        <option value="cuambogan">Cuambogan</option>
+        <option value="la-filipina">La Filipina</option>
+        <option value="liboganon">Liboganon</option>
+        <option value="madaum">Madaum</option>
+        <option value="magdum">Magdum</option>
+        <option value="mankilam">Mankilam</option>
+        <option value="new-balamban">New Balamban</option>
+        <option value="nueva-fuerza">Nueva Fuerza</option>
+        <option value="pagsabangan">Pagsabangan</option>
+        <option value="pandapan">Pandapan</option>
+        <option value="magugpo-poblacion">Magugpo Poblacion</option>
+        <option value="san-agustin">San Agustin</option>
+        <option value="san-isidro">San Isidro</option>
+        <option value="san-miguel-camp-4">San Miguel Camp 4</option>
+        <option value="visayan-village">Visayan Village</option>
+        <option value="magugpo-east">Magugpo East</option>
+        <option value="magugpo-north">Magugpo North</option>
+        <option value="magugpo-south">Magugpo South</option>
+        <option value="magugpo-west">Magugpo West</option>
+      </select>
     </div>
+  );
+};
+
+const GMap = () => {
+  const [markerPos, setMarkerPos] = useState(null);
+  const [areaStats, setAreaStats] = useState(null);
+
+  return (
+    <APIProvider apiKey={`${import.meta.env.VITE_GMAP_API}`}>
+      <div className="gmap-container">
+
+        {/* MAP */}
+        <div className="map-wrapper">
+          <Map
+            id="main-map"
+            className="map"
+            defaultZoom={12}
+            defaultCenter={{ lat: 7.44848, lng: 125.80031 }}
+          >
+            {markerPos && <Marker position={markerPos} />}
+          </Map>
+        </div>
+
+        {/* SIDE PANEL */}
+        <div className="side-panel">
+          <AreaSelector
+            setMarkerPos={setMarkerPos}
+            setAreaStats={setAreaStats}
+          />
+
+          {areaStats && (
+            <div className="area-stats">
+              <h3>Area Stats</h3>
+              <p><strong>Area:</strong> {areaStats.area
+                .toLowerCase()
+                .replace(/[-—]/g, " ")   // remove dash / em dash
+                .replace(/\b\w/g, c => c.toUpperCase())}</p>
+              <p><strong>Total Concerns:</strong> {areaStats.totalConcerns}</p>
+
+              <p><strong>Resolved:</strong> <span>{areaStats.status.resolved}</span></p>
+              <p><strong>Pending:</strong> <span>{areaStats.status.pending}</span></p>
+              <p><strong>Ongoing:</strong> <span>{areaStats.status.ongoing}</span></p>
+              <p><strong>Rejected:</strong> <span>{areaStats.status.rejected}</span></p>
+
+
+            </div>
+          )}
+        </div>
+
+      </div>
+    </APIProvider>
   );
 };
 

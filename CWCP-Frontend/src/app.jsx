@@ -8,79 +8,72 @@ import Credits from './Credits/credits.jsx'
 import LoadingScreen from "./LoadingScreen/loadingscreen.jsx"
 import Error from "./Error/error.jsx";
 import Statistics from "./Stats/statistics.jsx";
-import Gmap from "./GMAP/gmap.jsx";
-import GMAP2 from "./GMAP/gmap2.jsx"
+import GMap from "./GMAP/gmap.jsx";
+import './app.css'
+import AllConcerns from "./CARDS/Categories/AllConcerns.jsx";
+import HeaderFrame from "./HeaderFrame/HeaderFrame.jsx";
 function App() {
-  const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
 
-  
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2000); 
-    return () => clearTimeout(timer);
-  }, []);
 
-  const route = createBrowserRouter([
-    {
-      path: "/",
-      element: (
-        <>
-          <div id="main">
-            {/* <Main />
-            <Credits/> */}
+    useEffect(() => {
+        const timer = setTimeout(() => setLoading(false), 2000);
+        return () => clearTimeout(timer);
+    }, []);
 
-            {/* <Gmap apiKey={import.meta.env.VITE_GMAP_API}/> */}
-            <GMAP2 apiKey={import.meta.env.VITE_GMAP_API}/>
-            <Statistics/>
-          </div>
-          
-        </>
-      ),
-    },
-    {
-      path: "/mod",
-      element: <Mod />,
-    },
-    {
-      path: "/dashboard",
-      element: (
-        <>
-          <div id="main">           
-            <Main />
-            <Statistics/>
-          </div>
-        </>
-      ),
-    },
-    {
-      path:"*",
-      element:(
-        <>
-          <Error/>
-        </>
-      )
-    },
-    {
-      path: "/statistics",
-      element: (
-        <>
-          <div id="main">           
-            <Statistics/>
-            
-          </div>
-        </>
-      ),
-    },
-  ]);
+    const route = createBrowserRouter([
+        {
+            path: "/",
+            element: (
+                <>
+                    <div id="main">
+                        
 
-  return (
-    <div>
-      {loading ? (
-        <LoadingScreen/>
-      ) : (
-        <RouterProvider router={route} />
-      )}
-    </div>
-  );
+                        <Main />
+                        
+                        {/* Any new components added here will auto-flow */}
+                    </div>
+
+
+                </>
+            ),
+        },
+        {
+            path: "/mod",
+            element: <Mod />, // No GMap here
+        },
+        {
+            path: "/dashboard",
+            element: (
+                <>
+                    <div id="main">
+                        <Main />
+                        {/* GMap added to the /dashboard view */}
+                    </div>
+                </>
+            ),
+        },
+        {
+            path: "*",
+            element: (
+                <>
+                    <Error />
+                </>
+            )
+        },
+        
+    ]);
+
+    return (
+        <div>
+            {loading ? (
+                <LoadingScreen />
+            ) : (
+                <RouterProvider router={route} />
+            )}
+
+        </div>
+    );
 }
 
 export default App;

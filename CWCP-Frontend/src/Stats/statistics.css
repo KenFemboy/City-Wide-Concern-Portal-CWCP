@@ -1,113 +1,274 @@
-.dashboard-section {
-  background: #ffffff;
-  border-radius: 20px;
-  padding: 30px;
-  margin: 20px 0;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-  font-family: 'Poppins', sans-serif;
+/* ===== ROOT CONTAINER ===== */
+.app-root {
+  /* min-height: 100vh; */
+  background: #f5f7fa;
+  padding: clamp(1rem, 3vw, 2rem);
+  font-family: system-ui, -apple-system, sans-serif;
 }
 
-.stats-header {
+.loading-container,
+.error-container {
+  padding: 2rem;
   text-align: center;
-  margin-bottom: 30px;
+  font-family: system-ui, sans-serif;
 }
 
-.stats-header h2 {
-  color: rgb(124, 179, 66);
-  font-size: 1.8rem;
-  font-weight: 600;
-  margin-bottom: 20px;
-}
-.stats-logo{
-  width: 50px;
-}
-.stats-summary {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  flex-wrap: wrap;
+.error-container {
+  color: #d32f2f;
 }
 
-.summary-card {
-  background: #f7f8fa;
-  border-radius: 15px;
-  padding: 15px 30px;
+/* ===== HEADER ===== */
+.title {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  color: #1f2253;
+  margin: 0 10px;
   text-align: center;
-  border: 1px solid #e6e6e6;
-  transition: all 0.3s ease;
 }
 
-.summary-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+/* ===== STAT CARDS ===== */
+.stats-cards {
+  display: block; /* Changed from grid to block for full width */
+  padding-top: 20px; /* Reduced from 130px to 20px */
+  width: 100%;
+}
+/* RIGHT COLUMN SIDEBAR */
+.stats-sidebar {
+  display: grid; /* Changed to grid for better layout */
+  grid-template-columns: 1fr; /* Single column for sidebar */
+  gap: 1rem;
+  width: 100%;
 }
 
-.summary-card h4 {
-  color: #555;
-  font-size: 1rem;
-  margin-bottom: 5px;
+.stat-card {
+  background: white;
+  border-radius: 12px;
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e6edff;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+  width: 100%;
 }
 
-.summary-card p {
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: rgb(124, 179, 66);
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.stats-grid {
+.stat-value {
+  margin: 0 0 0.5rem 0;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  color: #1f2253;
+}
+
+.stat-title {
+  margin: 0 0 0.5rem 0;
+  font-size: clamp(0.85rem, 1.5vw, 0.9rem);
+  color: #7c8db5;
+  line-height: 1.4;
+}
+
+.stat-subtitle {
+  margin: 0;
+  font-size: clamp(0.8rem, 1.2vw, 0.85rem);
+  color: #00b034;
+  font-weight: 500;
+}
+
+/* ===== CHARTS WRAPPER ===== */
+.charts-wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 25px;
-  margin-top: 25px;
+  grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
+  gap: clamp(1rem, 2vw, 1.5rem);
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
 }
 
-.stats-card {
-  background: #f9fafb;
-  border-radius: 15px;
-  padding: 20px;
-  border: 1px solid #e6e6e6;
-  transition: all 0.3s ease;
+/* Desktop: 2fr 1fr layout for larger screens */
+@media (min-width: 1024px) {
+  .charts-wrapper {
+    grid-template-columns: 2fr 1fr;
+  }
 }
 
-.stats-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+/* ===== CHART CONTAINERS ===== */
+.chart-container,
+.donut-container,
+.severity-container {
+  background: white;
+  border-radius: 12px;
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e6edff;
 }
 
-.stats-card h3 {
-  color: rgb(124, 179, 66);
+.chart-header {
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+}
+
+.chart-title {
+  margin: 0 0 1rem 0;
+  font-size: clamp(1.1rem, 2.5vw, 1.25rem);
   font-weight: 600;
-  text-align: center;
-  margin-bottom: 10px;
-  font-size: 1.1rem;
-}
-.stats-card h3 {
-  color: rgb(124, 179, 66);
-  font-weight: 600;
-  text-align: center;
-  margin-bottom: 15px;
+  color: #1f2253;
 }
 
-.stats-logo {
-  width: 80px;
-  height: auto;
-  margin-bottom: 10px;
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: clamp(0.85rem, 1.5vw, 0.9rem);
+  color: #7c8db5;
 }
 
-.stats-card h3 {
-  color: #333;
-  font-weight: 600;
-  text-align: center;
-  margin-bottom: 15px;
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
 }
 
-.stats-logo {
-  width: 80px;
-  height: auto;
-  margin-bottom: 10px;
+.donut-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
 }
 
-.recharts-legend-item-text {
-  font-size: 12px;
-  color: #555;
+/* ===== RESPONSIVE BREAKPOINTS ===== */
+
+/* Extra Small Devices (Phones, less than 480px) */
+@media (max-width: 479px) {
+  .app-root {
+    padding: 1rem;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .stat-card {
+    padding: 1rem;
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
+  }
+
+  .chart-container,
+  .donut-container,
+  .severity-container {
+    padding: 1rem;
+  }
+
+  .charts-wrapper {
+    gap: 1rem;
+  }
+}
+
+/* Small Devices (Landscape Phones, 480px - 767px) */
+@media (min-width: 480px) and (max-width: 767px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .charts-wrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Medium Devices (Tablets, 768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .charts-wrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Large Devices (Desktops, 1024px - 1439px) */
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Extra Large Devices (Large Desktops, 1440px - 1919px) */
+@media (min-width: 1440px) and (max-width: 1919px) {
+  .cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .app-root {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+}
+
+/* Ultra Wide Screens (1920px and above) */
+@media (min-width: 1920px) {
+  .app-root {
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+
+  .cards {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+
+  .charts-wrapper {
+    gap: 2rem;
+  }
+}
+
+/* Portrait Tablet Adjustments */
+@media (min-width: 768px) and (max-width: 1023px) and (orientation: portrait) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Landscape Tablet Adjustments */
+@media (min-width: 768px) and (max-width: 1023px) and (orientation: landscape) {
+  .cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Small Laptops */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .stat-card {
+    padding: 1.25rem;
+  }
+
+  .stat-value {
+    font-size: 1.75rem;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .app-root {
+    padding: 1rem;
+    background: white;
+  }
+
+  .stat-card,
+  .chart-container,
+  .donut-container,
+  .severity-container {
+    box-shadow: none;
+    border: 1px solid #ddd;
+    page-break-inside: avoid;
+  }
 }

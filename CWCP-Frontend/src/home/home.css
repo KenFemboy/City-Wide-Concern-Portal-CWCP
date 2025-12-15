@@ -1,0 +1,39 @@
+/* ========================================
+   HOME VIEW
+   ======================================== */
+.home-view {
+  max-width: 1200px;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.home-section {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.home-section h2 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  color: #00642f;
+  margin: 0 0 20px 0;
+}
+
+.home-section p {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  margin: 0 0 15px 0;
+}
+
+.home-section p:last-child {
+  margin-bottom: 0;
+}

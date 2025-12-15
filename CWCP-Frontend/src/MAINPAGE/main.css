@@ -1,185 +1,108 @@
-/* Dashboard Container */
-.dashboard {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
+
+#main {
+  
+  align-items: start;
   width: 100%;
-  background-color: #f7f8fa;
-  font-family: "Poppins", sans-serif;
-  overflow: hidden;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+.dashboard{
+  display: grid;
+  width: 100%;
+}
+.user-mainpage {
+  padding-top: 80px; /* Account for fixed header */
+  width: 100%;
+  
+
 }
 
-/* Main Section */
-.dashboard-main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
+.stats-sidebar {
+  width: 100%;
+  max-width: 380px;
+
+
+}
+
+.stat-card {
+  width: 100%;
+}
+.dashboard-layout {
+  display: grid;
+  grid-template-columns: 360px 1fr; /* stats | content */
+  width: 100%;
+  max-width: 100%;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.dashboard-stats {
+  position: sticky;
+  top: 80px; /* below header */
+  height: fit-content;
+}
+
+.dashboard-content {
+  width: 100%;
+  min-width: 0; /* IMPORTANT: prevents overflow gaps */
+}
+/* Prevent overflow issues */
+#main > * {
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  #main {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Form Modal Styles */
+.form-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
-  padding: 20px 40px;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
   box-sizing: border-box;
 }
 
-/* Header Section */
-.dashboard-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #ffffff;
-  padding: 15px 25px;
-  border-radius: 14px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  margin-bottom: 20px;
+.form-modal {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  max-width: 750px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-/* Left side: logo + tagline */
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.header-logo {
-  height: 50px;
-  width: 50px;
-  object-fit: contain;
-}
-
-.header-tagline {
-  font-size: 1rem;
-  font-weight: 500;
-  color: #333;
-  white-space: nowrap;
-}
-
-/* Right side: filters + searchbar */
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.open-modal-btn {
-  background-color: #009900;
-  color: white;
+.form-modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
   border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
+  font-size: 24px;
   cursor: pointer;
-  font-weight: 500;
-  transition: background 0.3s ease;
-}
-
-.open-modal-btn:hover {
-  background-color: #007a00;
-}
-
-/* Cards Container */
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  align-items: flex-start;
-  justify-content: space-evenly;
-}
-
-#noposts {
-  margin: 150px auto;
-  font-size: 2rem;
   color: #666;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s;
 }
 
-/* Hide scrollbar but keep scroll functionality */
-.dashboard-main {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
-}
-.dashboard-main::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
-}
-
-/* --------------------- Responsive --------------------- */
-
-/* Tablet view */
-@media (max-width: 900px) {
-  .dashboard {
-    flex-direction: column;
-  }
-
-  .dashboard > .sidebar-left {
-    width: 100%;
-    height: auto;
-    position: relative;
-  }
-
-  .dashboard-main {
-    padding: 15px 20px;
-  }
-
-  .dashboard-header {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .header-right {
-    width: 100%;
-    justify-content: space-between;
-  }
-}
-
-/* Mobile view */
-@media (max-width: 480px) {
-  .dashboard-main {
-    padding: 10px 15px;
-  }
-
-  .dashboard-header {
-    padding: 10px 15px;
-    border-radius: 10px;
-    margin-bottom: 15px;
-  }
-
-  .header-left {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .header-logo {
-    height: 40px;
-    width: 40px;
-  }
-
-  .header-tagline {
-    font-size: 0.85rem;
-    text-align: center;
-    white-space: normal;
-  }
-
-  .header-right {
-    flex-direction: column;
-    width: 100%;
-    gap: 10px;
-  }
-
-  .open-modal-btn {
-    width: 100%;
-    text-align: center;
-    padding: 10px;
-    font-size: 0.9rem;
-  }
-
-  .cards {
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-  }
-
-  #noposts {
-    margin: 80px auto;
-    font-size: 1.4rem;
-    text-align: center;
-  }
+.form-modal-close:hover {
+  background: #f0f0f0;
 }

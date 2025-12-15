@@ -5,28 +5,52 @@ const credits = () => {
     return (
         <>
             <footer className="main-footer">
-                <h1>Members:</h1>
+                <h1>Website Development Team</h1>
+
+                
 
                 <div className="member-grid">
                     <div className="member-card">
-                        <img src="https://placehold.co/200x200?text=Charles+Kent" alt="Charles Kent Labrador" />
+                        <img src="https://avatars.githubusercontent.com/u/210122774?v=4" alt="" />
+                        <p>Kyle Christian Verdida</p>
+                        <p>PROJECT MANAGER</p>
+                    </div>
+
+
+
+                    <div className="member-card">
+                        <img src="https://avatars.githubusercontent.com/u/124577578?v=4" alt="" />
                         <p>Charles Kent Labrador</p>
+                        <p>LEAD PROGRAMMER</p>
+                    </div>
+
+                    
+
+                    <div className="member-card">
+                        <img src="https://avatars.githubusercontent.com/u/232481857?v=4" alt="" />
+                        <p>Railey Muyco</p>
+                        <p>UI/UX DESIGNER</p>
                     </div>
 
                     <div className="member-card">
-                        <img src="https://placehold.co/200x200?text=Charles+Ian" alt="Charles Ian Danag" />
-                        <p>Charles Ian Danag</p>
+                        <img src="https://avatars.githubusercontent.com/u/187724128?v=4" alt="" />
+                        <p>Emmanuel Saludares</p>
+                        <p>SYSTEM TESTER</p>
                     </div>
 
-                    <div className="member-card">
-                        <img src="https://placehold.co/200x200?text=Lord+Anthony" alt="Lord Anthony Juguilon" />
-                        <p>Lord Anthony Juguilon</p>
-                    </div>
+                    {/* <div className="member-card">
+                        <img src="https://avatars.githubusercontent.com/u/230759622?v=4" alt="" />
+                        <p>Christian Saycon</p>
+                        <p>Analyst</p>
+                    </div> */}
 
                     <div className="member-card">
-                        <img src="https://placehold.co/200x200?text=Princess+Karel" alt="Princess Karel" />
-                        <p>Princess Karel</p>
+                        <img src="https://avatars.githubusercontent.com/u/244971521?v=4" alt="" />
+                        <p>Khrisopher Lloyd Rarama</p>
+                        <p>LEAD DESIGNER</p>
                     </div>
+                
+
                 </div>
             </footer>
             <Modbuttons/>

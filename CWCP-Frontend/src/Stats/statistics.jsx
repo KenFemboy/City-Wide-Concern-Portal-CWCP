@@ -1,133 +1,67 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-  CartesianGrid,
-  Legend,
-  ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
-} from "recharts";
 import "./statistics.css";
 
-const Statistics = () => {
-  const [stats, setStats] = useState(null);
+import TotalPostsSubmitted from "./stats-elements/statistics-totalpostsubmitted";
+import ResolvedIssues from "./stats-elements/statistics-resolved";
+import PendingIssues from "./stats-elements/statistics-pending";
+import RejectedIssues from "./stats-elements/statistics-rejected";
+import StatusBarChart from "./stats-elements/statistics-status-barchart";
+import AreaDonut from "./stats-elements/statistics-area-donut";
+import TodayPosts from "./stats-elements/statistics-todayposts";
+import GMap2 from "../GMAP/gmap2";
+import GMap from "../GMAP/gmap";
 
-  // Color palettes per chart
-  const STATUS_COLORS = ["#7CB342", "#9CCC65", "#AED581"];  // greens
-  const SEVERITY_COLORS = ["#42A5F5", "#64B5F6", "#90CAF9"]; // blues
-  const AREA_COLORS = [
-    "#8E24AA", "#AB47BC", "#BA68C8", "#CE93D8",
-    "#7B1FA2", "#9C27B0", "#E1BEE7"
-  ]; // purples
+
+export default function Statistics() {
+  const [stats, setStats] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
   useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_API_URL}/stats`)
-      .then((res) => setStats(res.data))
-      .catch((err) => console.error("Error fetching stats:", err));
+    fetch(`${API_URL}/stats`)
+      .then((res) => res.json())
+      .then((data) => {
+        setStats(data);
+        setLoading(false);
+      });
   }, []);
 
-  if (!stats) return <p>Loading statistics...</p>;
+  if (loading) return <h2>Loading statistics...</h2>;
+  if (!stats) return null;
+
+  const resolved =
+    stats.byStatus.find((s) => s.status.toLowerCase() === "resolved")?.count ||
+    0;
+  const pending =
+    stats.byStatus.find((s) =>
+      ["pending", "in progress"].includes(s.status.toLowerCase())
+    )?.count || 0;
+  const rejected =
+    stats.byStatus.find((s) => s.status.toLowerCase() === "rejected")?.count ||
+    0;
 
   return (
-    <div className="dashboard-section">
-      <div className="stats-header">
-        <img src="CWCP-LOGO.svg" alt="Citywide Concern Logo" className="stats-logo" />
-        <h2>Citywide Concern Analytics</h2>
-        <div className="stats-summary">
-          <div className="summary-card">
-            <h4>Total Posts</h4>
-            <p>{stats.totalPosts}</p>
-          </div>
-          <div className="summary-card">
-            <h4>Resolved Percentage</h4>
-            <p>{stats.resolvedPercentage}</p>
-          </div>
+    <div className="app-root">
+
+      <div className="stats-cards">
+        {/* <div>
+          <GMap2 />
+          <GMap/>
+        </div> */}
+
+        <div className="stats-sidebar">
+          <TotalPostsSubmitted total={stats.totalPosts} />
+          <TodayPosts />
+          <ResolvedIssues />
+          <RejectedIssues count={rejected} />
+          {/* <StatusBarChart data={stats.byStatus} /> */}
+        {/* <AreaDonut data={stats.byArea || []} /> */}
+        
         </div>
+
       </div>
 
-      <div className="stats-grid">
-        {/* Posts by Status */}
-        <div className="stats-card">
-          <h3>By Status</h3>
-          <ResponsiveContainer width="100%" height={260}>
-            <BarChart data={stats.byStatus}>
-              <CartesianGrid strokeDasharray="3 3" vertical={false} />
-              <XAxis dataKey="status" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              {stats.byStatus.map((entry, index) => (
-                <Bar
-                  key={`bar-${index}`}
-                  dataKey="count"
-                  fill={STATUS_COLORS[index % STATUS_COLORS.length]}
-                  radius={[6, 6, 0, 0]}
-                />
-              ))}
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-
-        {/* Posts by Severity */}
-        <div className="stats-card">
-          <h3>By Severity</h3>
-          <ResponsiveContainer width="100%" height={260}>
-            <BarChart data={stats.bySeverity}>
-              <CartesianGrid strokeDasharray="3 3" vertical={false} />
-              <XAxis dataKey="severity" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              {stats.bySeverity.map((entry, index) => (
-                <Bar
-                  key={`bar-${index}`}
-                  dataKey="count"
-                  fill={SEVERITY_COLORS[index % SEVERITY_COLORS.length]}
-                  radius={[6, 6, 0, 0]}
-                />
-              ))}
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-
-        {/* Posts by Area (Pie Chart) */}
-        <div className="stats-card">
-          <h3>By Area</h3>
-          <ResponsiveContainer width="100%" height={260}>
-            <PieChart>
-              <Pie
-                data={stats.byArea}
-                dataKey="count"
-                nameKey="area"
-                cx="50%"
-                cy="50%"
-                outerRadius={90}
-                label={({ name, percent }) =>
-                  `${name} ${(percent * 100).toFixed(1)}%`
-                }
-              >
-                {stats.byArea.map((entry, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={AREA_COLORS[index % AREA_COLORS.length]}
-                  />
-                ))}
-              </Pie>
-              <Tooltip />
-              <Legend layout="vertical" align="right" verticalAlign="middle" />
-            </PieChart>
-          </ResponsiveContainer>
-        </div>
-      </div>
+      
     </div>
   );
-};
-
-export default Statistics;
+}

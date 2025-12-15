@@ -1,0 +1,140 @@
+/* Open Modal Button */
+.open-modal-btn {
+  padding: 10px 20px;
+  background: #2e7d32; /* green */
+  border: none;
+  border-radius: 8px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.open-modal-btn:hover {
+  background: #1b5e20; /* darker green */
+}
+
+/* Modal Overlay */
+.modal-overlay-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+/* Modal Content */
+.modal-content-sidebar {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 445px;
+  height: 100%;
+  background: #FFFFFF;
+  border-radius: 0;
+  padding: 30px;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+  overflow-y: auto;
+}
+
+/* Modal Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.modal-header h2 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600; /* stronger font */
+  font-size: 26px; /* more modern */
+  letter-spacing: 0.5px;
+  color: #1f1f1f;
+  margin: 0;
+}
+
+/* Close Button */
+.close-btn-sidebar {
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #1E1E1E;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+}
+
+.close-btn-sidebar:hover {
+  opacity: 0.7;
+}
+
+/* Modal Body */
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.modal-body label {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500; /* better readability */
+  font-size: 17px;
+  color: #1f1f1f;
+  margin-bottom: 6px;
+  display: block;
+}
+
+/* Dropdowns */
+.modal-body select {
+  width: 100%;
+  height: 42px;
+  padding: 10px 20px;
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  color: #000000;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.2s ease;
+}
+
+.modal-body select:focus {
+  border-color: #2e7d32; /* green highlight */
+  box-shadow: 0 0 5px rgba(46, 125, 50, 0.4);
+}
+
+.modal-body select:hover {
+  border-color: rgba(0, 0, 0, 0.35);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .modal-content-sidebar {
+    width: 80%;
+    max-width: 350px;
+    padding: 20px;
+  }
+
+  .modal-header h2 {
+    font-size: 22px;
+  }
+
+  .modal-body label {
+    font-size: 16px;
+  }
+
+  .modal-body select {
+    font-size: 14px;
+  }
+}
